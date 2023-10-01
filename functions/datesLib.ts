@@ -1,26 +1,32 @@
 const getLastMonday = (targetDate: Date) => {
   const lastMonday = targetDate;
   lastMonday.setDate(lastMonday.getDate() - ((lastMonday.getDay() + 6) % 7));
+  lastMonday.setHours(0, 0, 0, 0);
 
   return lastMonday;
 };
 
 const getWeekAtDate = (targetDate: Date) => {
   const monday = getLastMonday(targetDate);
-  const tuesday = new Date();
+  const tuesday = new Date(monday);
   tuesday.setDate(monday.getDate() + 1);
-  const wednesday = new Date();
+  const wednesday = new Date(monday);
   wednesday.setDate(monday.getDate() + 2);
-  const thirsday = new Date();
+  const thirsday = new Date(monday);
   thirsday.setDate(monday.getDate() + 3);
-  const friday = new Date();
+  const friday = new Date(monday);
   friday.setDate(monday.getDate() + 4);
-  const saturday = new Date();
-  saturday.setDate(monday.getDate() + 5);
-  const sunday = new Date();
-  sunday.setDate(monday.getDate() + 6);
 
-  return [monday, tuesday, wednesday, thirsday, friday, saturday, sunday];
+  return [monday, tuesday, wednesday, thirsday, friday];
+};
+
+const getCustomDateFromDate = (targetDate: Date) => {
+  return {
+    date: targetDate.getDate(),
+    month: targetDate.getMonth(),
+    year: targetDate.getFullYear(),
+    hour: targetDate.getHours(),
+  };
 };
 
 const arrayMonths = [
@@ -52,4 +58,4 @@ const arrayHours = [
   "18-19",
 ];
 
-export { getWeekAtDate, arrayHours, arrayMonths };
+export { getWeekAtDate, arrayHours, arrayMonths, getCustomDateFromDate };

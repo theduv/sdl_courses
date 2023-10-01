@@ -1,9 +1,57 @@
 [
     {
+        "id": 0,
         "title": "Allemand",
-        "timeFrom": 1698318000000,
-        "timeTo": 1698321600000,
+        "timeFrom": {
+            "date": 26,
+            "month": 8,
+            "year": 2023,
+            "hour": 9
+        },
+        "timeTo": {
+            "date": 26,
+            "month": 8,
+            "year": 2023,
+            "hour": 11
+        },
         "notes": "Absent",
         "color": "#cecece"
+    },
+    {
+        "id": 1,
+        "title": "Anglais",
+        "timeFrom": {
+            "date": 26,
+            "month": 8,
+            "year": 2023,
+            "hour": 9
+        },
+        "timeTo": {
+            "date": 26,
+            "month": 8,
+            "year": 2023,
+            "hour": 11
+        },
+        "notes": "Absent",
+        "color": "#dfe23a"
+    },
+    {
+        "id": 2,
+        "title": "Norvégien",
+        "timeFrom": {
+            "date": 26,
+            "month": 8,
+            "year": 2023,
+            "hour": 9
+        },
+        "timeTo": {
+            "date": 26,
+            "month": 8,
+            "year": 2023,
+            "hour": 11
+        },
+        "notes": "Absent",
+        "color": "#a45fda",
+        "textColor": "#FFFFFF"
     }
 ]

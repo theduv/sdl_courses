@@ -11,8 +11,11 @@
   "dependencies": {
     "clsx": "^2.0.0",
     "next": "latest",
+    "planby": "^1.1.4",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-icons": "^4.11.0",
+    "react-modal": "^3.16.1"
   },
   "devDependencies": {
     "@types/node": "latest",
