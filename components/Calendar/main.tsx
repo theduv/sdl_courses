@@ -30,7 +30,7 @@ const Calendar = (props: CalendarProps) => {
       })}
       {arrayHours.map((hour: string, index: number) => {
         return (
-          <Fragment>
+          <Fragment key={hour}>
             <div className="items-center flex justify-center">{hour}</div>
             <div
               className={

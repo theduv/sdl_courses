@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "clsx": "^2.0.0",
+    "firebase": "^10.4.0",
     "next": "latest",
     "planby": "^1.1.4",
     "react": "latest",
