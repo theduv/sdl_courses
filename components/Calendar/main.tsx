@@ -2,17 +2,62 @@
 import { arrayHours, arrayMonths, getWeekAtDate } from "@/functions/datesLib";
 import { GetCourseAtTime } from "@/functions/getCourseAtTime";
 import Course from "@/interfaces/course.interface";
-import { Fragment, useEffect, useState } from "react";
-import coursesSamples from "../../coursesSample.json";
+import { Dispatch, Fragment, SetStateAction, useEffect, useState } from "react";
 import SingleSquare from "./SingleSquare";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+} from "firebase/firestore";
+import db from "@/firebase/firebaseInit";
+import EnumPagesPanel from "@/enums/enumPagesPanel";
 
 interface CalendarProps {
   currentDate: Date;
+  setOpenRightPanel: Dispatch<SetStateAction<boolean>>;
+  setDetailsRightPanel: Dispatch<SetStateAction<Course | null>>;
+  setContentRightPanel: Dispatch<SetStateAction<EnumPagesPanel | null>>;
 }
 
 const Calendar = (props: CalendarProps) => {
   const [displayedDates, setDisplayedDates] = useState<Array<Date>>([]);
-  const [coursesList, setCoursesList] = useState<Array<Course>>(coursesSamples);
+  const [coursesList, setCoursesList] = useState<Array<Course>>([]);
+
+  const fetchCourses = async () => {
+    const query = await getDocs(collection(db, "courses"));
+    const arrayCourses: Array<Course> = [];
+    query.forEach((doc) => {
+      arrayCourses.push({
+        title: doc.data().title,
+        notes: doc.data().notes,
+        timeFrom: JSON.parse(doc.data().timeFrom),
+        timeTo: JSON.parse(doc.data().timeTo),
+        textColor: doc.data().textColor,
+        backgroundColor: doc.data().backgroundColor,
+      });
+    });
+    setCoursesList(arrayCourses);
+  };
+
+  useEffect(() => {
+    const q = query(collection(db, "courses"));
+    const unsub = onSnapshot(q, (snap) => {
+      const newDocs = snap.docs.map((doc) => ({
+        title: doc.data().title,
+        notes: doc.data().notes,
+        timeFrom: JSON.parse(doc.data().timeFrom),
+        timeTo: JSON.parse(doc.data().timeTo),
+        textColor: doc.data().textColor,
+        backgroundColor: doc.data().backgroundColor,
+      }));
+      setCoursesList((oldList) => [...oldList, ...newDocs]);
+    });
+    return () => {
+      unsub();
+    };
+  }, []);
 
   useEffect(() => {
     setDisplayedDates(getWeekAtDate(props.currentDate));
@@ -32,52 +77,56 @@ const Calendar = (props: CalendarProps) => {
         return (
           <Fragment key={hour}>
             <div className="items-center flex justify-center">{hour}</div>
-            <div
-              className={
-                "h-16 border border-b border-t-0 border-l-0 " +
-                (index === 10 ? "border-b-0 " : " ") +
-                (GetCourseAtTime(coursesList, displayedDates[0], hour)
-                  .length !== 0
-                  ? "bg-gray-200 "
-                  : " ")
-              }
-            ></div>
             <SingleSquare
               index={index}
-              coursesList={coursesSamples}
+              coursesList={coursesList}
               displayedDates={displayedDates}
               hour={hour}
+              indexSquare={0}
+              setOpenRightPanel={props.setOpenRightPanel}
+              setDetailsRightPanel={props.setDetailsRightPanel}
+              setContentRightPanel={props.setContentRightPanel}
             />
-            <div
-              className={
-                "h-16 border border-b border-t-0 border-l-0 " +
-                (index === 10 ? "border-b-0 " : " ") +
-                (GetCourseAtTime(coursesSamples, displayedDates[2], hour)
-                  .length !== 0
-                  ? "bg-gray-200 "
-                  : " ")
-              }
-            ></div>
-            <div
-              className={
-                "h-16 border border-b border-t-0 border-l-0 " +
-                (index === 10 ? "border-b-0 " : " ") +
-                (GetCourseAtTime(coursesSamples, displayedDates[3], hour)
-                  .length !== 0
-                  ? "bg-gray-200 "
-                  : " ")
-              }
-            ></div>
-            <div
-              className={
-                "border h-16 border-b border-t-0 border-l-0 border-r-0 " +
-                (index === 10 ? "border-b-0 " : " ") +
-                (GetCourseAtTime(coursesSamples, displayedDates[4], hour)
-                  .length !== 0
-                  ? "bg-gray-200 "
-                  : " ")
-              }
-            ></div>
+            <SingleSquare
+              index={index}
+              coursesList={coursesList}
+              displayedDates={displayedDates}
+              hour={hour}
+              indexSquare={1}
+              setOpenRightPanel={props.setOpenRightPanel}
+              setContentRightPanel={props.setContentRightPanel}
+              setDetailsRightPanel={props.setDetailsRightPanel}
+            />
+            <SingleSquare
+              index={index}
+              coursesList={coursesList}
+              displayedDates={displayedDates}
+              hour={hour}
+              indexSquare={2}
+              setContentRightPanel={props.setContentRightPanel}
+              setOpenRightPanel={props.setOpenRightPanel}
+              setDetailsRightPanel={props.setDetailsRightPanel}
+            />
+            <SingleSquare
+              index={index}
+              coursesList={coursesList}
+              displayedDates={displayedDates}
+              hour={hour}
+              indexSquare={3}
+              setOpenRightPanel={props.setOpenRightPanel}
+              setContentRightPanel={props.setContentRightPanel}
+              setDetailsRightPanel={props.setDetailsRightPanel}
+            />
+            <SingleSquare
+              index={index}
+              coursesList={coursesList}
+              displayedDates={displayedDates}
+              hour={hour}
+              indexSquare={4}
+              setOpenRightPanel={props.setOpenRightPanel}
+              setContentRightPanel={props.setContentRightPanel}
+              setDetailsRightPanel={props.setDetailsRightPanel}
+            />
           </Fragment>
         );
       })}

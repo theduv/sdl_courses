@@ -15,8 +15,8 @@ const GetCourseAtTime = (
       course.timeFrom.date === currentCustomDate.date &&
       course.timeFrom.month === currentCustomDate.month &&
       course.timeFrom.year === currentCustomDate.year &&
-      (parseInt(hours[0]) === course.timeFrom.hour ||
-        parseInt(hours[1]) === course.timeTo.hour)
+      parseInt(hours[0]) >= course.timeFrom.hour &&
+      parseInt(hours[1]) <= course.timeTo.hour
     )
       return true;
   });

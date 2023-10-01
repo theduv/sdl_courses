@@ -5,7 +5,7 @@ interface Course {
   notes?: string;
   timeFrom: CustomDate;
   timeTo: CustomDate;
-  color?: string;
+  backgroundColor?: string;
   textColor?: string;
 }
 

@@ -3,6 +3,7 @@ import RightPaneHeader from "./RightPaneHeader";
 import { SetStateAction, Dispatch } from "react";
 import PagesPanel from "@/enums/enumPagesPanel";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
+import Course from "@/interfaces/course.interface";
 import AddCourse from "../ContentsPanel/AddCourse/main";
 import SingleCourseDetails from "../ContentsPanel/SingleCourseDetails/main";
 
@@ -10,13 +11,14 @@ interface RightPaneProps {
   open: boolean;
   content?: PagesPanel | null;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  detailsRightPanel: Course | null;
 }
 
-const RightPane = (props: RightPaneProps) => {
+const RightPanel = (props: RightPaneProps) => {
   const getContent = () => {
     if (props.content === EnumPagesPanel.addCourse) return <AddCourse />;
     if (props.content === EnumPagesPanel.singleCourseDetails)
-      return <SingleCourseDetails />;
+      return <SingleCourseDetails course={props.detailsRightPanel} />;
   };
 
   return (
@@ -36,4 +38,4 @@ const RightPane = (props: RightPaneProps) => {
   );
 };
 
-export default RightPane;
+export default RightPanel;
