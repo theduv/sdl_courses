@@ -182,10 +182,16 @@ const AddCourse = () => {
             style={{ backgroundColor: colorBackground, color: colorText }}
             className="rounded-lg px-4 py-2 p-1"
           >
-            {title.length ? title : "Example"}
+            Example
           </div>
         </div>
-        <button type="submit" className="rounded-lg px-6 py-2 bg-gray-600">
+        <button
+          type="submit"
+          className={clsx("rounded-lg px-6 py-2", {
+            "bg-gray-300 cursor-default text-gray-400": title.length === 0,
+            "bg-blue-600": title.length !== 0,
+          })}
+        >
           Ajouter
         </button>
       </form>
