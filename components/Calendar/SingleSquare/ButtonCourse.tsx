@@ -20,6 +20,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
       title: props.course.title,
       notes: props.course.notes,
       id: props.course.id,
+      links: props.course.links,
     });
   };
 

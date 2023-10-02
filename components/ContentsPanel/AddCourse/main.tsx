@@ -2,9 +2,9 @@
 
 import CustomInput from "@/components/Global/CustomInput";
 import db from "@/firebase/firebaseInit";
-import Course from "@/interfaces/course.interface";
 import CustomDate from "@/interfaces/customDate.interface";
 import Store from "@/interfaces/store.interface";
+import { toast } from "react-toastify";
 import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
 import { addDoc, collection } from "firebase/firestore";
@@ -24,6 +24,7 @@ const AddCourse = () => {
   const [colorBackground, setColorBackground] = useState("#FFFFFF");
   const [pickText, setPickText] = useState<boolean>(false);
   const [pickBackground, setPickBackground] = useState<boolean>(false);
+  const [link, setLink] = useState<Array<string>>([]);
   const refTextPicker = useRef<HTMLDivElement>(null);
   const refBackgroundPicker = useRef<HTMLDivElement>(null);
 
@@ -54,33 +55,43 @@ const AddCourse = () => {
     };
   }, [refBackgroundPicker]);
 
+  const onChangeLink = (e: any) => {
+    setLink(e.target.value);
+  };
+
   const onSubmitForm = async (e: any) => {
-    e.preventDefault();
-    const dateStart: CustomDate = {
-      date: parseInt(date.split("-")[2]),
-      month: parseInt(date.split("-")[1]) - 1,
-      year: parseInt(date.split("-")[0]),
-      hour: parseInt(timeStart.split(":")[0]),
-    };
+    try {
+      e.preventDefault();
+      const dateStart: CustomDate = {
+        date: parseInt(date.split("-")[2]),
+        month: parseInt(date.split("-")[1]) - 1,
+        year: parseInt(date.split("-")[0]),
+        hour: parseInt(timeStart.split(":")[0]),
+      };
 
-    const dateEnd: CustomDate = {
-      date: parseInt(date.split("-")[2]),
-      month: parseInt(date.split("-")[1]) - 1,
-      year: parseInt(date.split("-")[0]),
-      hour: parseInt(timeEnd.split(":")[0]),
-    };
+      const dateEnd: CustomDate = {
+        date: parseInt(date.split("-")[2]),
+        month: parseInt(date.split("-")[1]) - 1,
+        year: parseInt(date.split("-")[0]),
+        hour: parseInt(timeEnd.split(":")[0]),
+      };
 
-    await addDoc(collection(db, "courses"), {
-      title,
-      notes: notes,
-      timeFrom: JSON.stringify(dateStart),
-      timeTo: JSON.stringify(dateEnd),
-      backgroundColor: colorBackground,
-      textColor: colorText,
-    });
+      await addDoc(collection(db, "courses"), {
+        title,
+        notes: notes,
+        timeFrom: JSON.stringify(dateStart),
+        timeTo: JSON.stringify(dateEnd),
+        backgroundColor: colorBackground,
+        textColor: colorText,
+        links: [link],
+      });
 
-    setTitle("");
-    setNotes("");
+      setTitle("");
+      setNotes("");
+      toast("Cours correctement ajouté");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -118,9 +129,19 @@ const AddCourse = () => {
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Notes additionnelles"
+          placeholder="Notes additionnelles (prof absent, changement de salle...)"
           className="rounded-lg bg-gray-600 p-4 w-full h-64"
         />
+        <label className="flex w-full justify-between items-center space-x-3">
+          <h2>Lien prise de note</h2>
+          <input
+            value={link}
+            onChange={onChangeLink}
+            type="url"
+            className="rounded-lg bg-gray-600 px-4 py-2"
+            placeholder="Lien google drive, dropbox..."
+          />
+        </label>
         <div className="flex w-full justify-between items-center">
           <div className="flex flex-col">
             <div>
@@ -128,7 +149,7 @@ const AddCourse = () => {
                 className="text-blue-500 cursor-pointer underline"
                 onClick={() => setPickText(true)}
               >
-                Change text color
+                Modifier la couleur du texte
               </h3>
               <div
                 className={clsx("absolute", { hidden: !pickText })}
@@ -142,7 +163,7 @@ const AddCourse = () => {
                 className="text-blue-500 cursor-pointer underline"
                 onClick={() => setPickBackground(true)}
               >
-                Change background color
+                Modifier la couleur du fond
               </h3>
               <div
                 className={clsx("absolute", { hidden: !pickBackground })}

@@ -39,6 +39,22 @@ const SingleCourseDetails = () => {
         onChange={onChangeValueNotes}
         className="rounded-lg bg-gray-600 p-4 w-full h-32"
       />
+      <div>Liens vers les prises de notes</div>
+      <ul>
+        {panelStore.courseDetailsDefault.links ? (
+          panelStore.courseDetailsDefault.links.map((link: string) => (
+            <li>
+              <a href={link} target="blank" className="text-blue-600 underline">
+                {link}
+              </a>
+            </li>
+          ))
+        ) : (
+          <h2 className="italic text-sm">
+            Aucun lien n'a encore été posté pour ce cours.
+          </h2>
+        )}
+      </ul>
       <div className="flex justify-between">
         <ButtonSave />
         <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />

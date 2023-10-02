@@ -7,7 +7,7 @@ import {
 } from "@/functions/datesLib";
 import Course from "@/interfaces/course.interface";
 import { Fragment, useEffect, useState } from "react";
-import SingleSquare from "./SingleSquare";
+import SingleSquare from "./SingleSquare/main";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
@@ -30,6 +30,7 @@ const Calendar = (props: CalendarProps) => {
         timeFrom: JSON.parse(doc.data().timeFrom),
         timeTo: JSON.parse(doc.data().timeTo),
         textColor: doc.data().textColor,
+        links: doc.data().links,
         backgroundColor: doc.data().backgroundColor,
       }));
       const removedDuplicates: Array<any> = [];
