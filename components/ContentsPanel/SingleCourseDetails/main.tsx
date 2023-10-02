@@ -12,7 +12,9 @@ const SingleCourseDetails = () => {
     panelStore.courseDetailsDefault.notes
   );
 
-  const links = panelStore.courseDetailsDefault.links.split(";");
+  const links = panelStore.courseDetailsDefault.links
+    ? panelStore.courseDetailsDefault.links.split(";")
+    : [];
 
   const [titleValue, setTitleValue] = useState(
     panelStore.courseDetailsDefault.title
