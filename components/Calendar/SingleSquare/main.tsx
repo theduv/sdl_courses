@@ -52,7 +52,7 @@ const SingleSquare = (props: SingleSquareProps) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={
-        "h-14 border border-b border-t-0 border-l-0 p-1 text-gray-500 flex items-center justify-center space-x-1 " +
+        "h-14 border border-b border-t-0 border-l-0 p-1 text-gray-500 flex items-center justify-center space-x-1 border-opacity-20 border-gray-200 " +
         (props.index === 10 ? "border-b-0 " : " ") +
         (props.indexSquare === 4 ? "border-r-0 " : " ")
       }
