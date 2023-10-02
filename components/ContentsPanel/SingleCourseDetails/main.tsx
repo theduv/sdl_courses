@@ -11,6 +11,9 @@ const SingleCourseDetails = () => {
   const [notesValue, setNotesValue] = useState(
     panelStore.courseDetailsDefault.notes
   );
+
+  const links = panelStore.courseDetailsDefault.links.split(";");
+
   const [titleValue, setTitleValue] = useState(
     panelStore.courseDetailsDefault.title
   );
@@ -42,7 +45,7 @@ const SingleCourseDetails = () => {
       <div>Liens vers les prises de notes</div>
       <ul>
         {panelStore.courseDetailsDefault.links ? (
-          panelStore.courseDetailsDefault.links.map((link: string) => (
+          links.map((link: string) => (
             <li>
               <a href={link} target="blank" className="text-blue-600 underline">
                 {link}
