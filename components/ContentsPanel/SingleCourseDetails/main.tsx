@@ -1,22 +1,47 @@
-import Course from "@/interfaces/course.interface";
+import useRightPanelStore from "@/store/store";
+import { useState } from "react";
+import ButtonSave from "./ButtonSave";
+import ButtonDelete from "./ButtonDelete";
 
-interface SingleCourseDetailsProps {
-  course: Course | null;
-}
+const SingleCourseDetails = () => {
+  const panelStore = useRightPanelStore((state: any) => ({
+    courseDetailsDefault: state.courseDetailsDefault,
+  }));
 
-const SingleCourseDetails = (props: SingleCourseDetailsProps) => {
-  if (props.course === null) {
-    return <div></div>;
-  }
+  const [notesValue, setNotesValue] = useState(
+    panelStore.courseDetailsDefault.notes
+  );
+  const [titleValue, setTitleValue] = useState(
+    panelStore.courseDetailsDefault.title
+  );
+
+  const onChangeValueNotes = (e: any) => {
+    setNotesValue(e.target.value);
+  };
+
+  const onChangeValueTitle = (e: any) => {
+    setTitleValue(e.target.value);
+  };
+
   return (
     <div className="flex flex-col space-y-4">
-      <h2 className="text-2xl">{props.course.title}</h2>
-      <div>
-        <h3>Notes</h3>
-        <textarea
-          value={props.course.notes}
-          className="rounded-lg bg-gray-600 p-4 w-full h-32"
+      <label>
+        <h1>Titre</h1>
+        <input
+          className="rounded-lg bg-gray-600 text-gray-200 p-2 text-xl"
+          value={titleValue}
+          onChange={onChangeValueTitle}
         />
+      </label>
+      <h3>Notes</h3>
+      <textarea
+        value={notesValue}
+        onChange={onChangeValueNotes}
+        className="rounded-lg bg-gray-600 p-4 w-full h-32"
+      />
+      <div className="flex justify-between">
+        <ButtonSave />
+        <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />
       </div>
     </div>
   );

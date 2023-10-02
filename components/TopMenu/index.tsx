@@ -2,17 +2,28 @@ import { Dispatch, SetStateAction } from "react";
 import ButtonCalendar from "./ButtonCalendar";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import { VscTriangleLeft, VscTriangleRight } from "react-icons/vsc";
+import useRightPanelStore from "@/store/store";
+import { getCustomDateFromDate } from "@/functions/datesLib";
 
 interface TopMenuProps {
-  setOpenRightPanel: Dispatch<SetStateAction<boolean>>;
-  setContentRightPanel: Dispatch<SetStateAction<EnumPagesPanel | null>>;
   setCurrentDate: Dispatch<SetStateAction<Date>>;
 }
 
 const TopMenu = (props: TopMenuProps) => {
+  const panelStore = useRightPanelStore((state: any) => ({ ...state }));
+  const currentDate = new Date();
+  const formattedDate = getCustomDateFromDate(currentDate);
+
   const onClickAddCourse = () => {
-    props.setOpenRightPanel(true);
-    props.setContentRightPanel(EnumPagesPanel.addCourse);
+    panelStore.setAddCourseDefault({
+      date: `${formattedDate.year}-${(formattedDate.month - 1)
+        .toString()
+        .padStart(2, "0")}-${formattedDate.date.toString().padStart(2, "0")}`,
+      timeFrom: "08:00",
+      timeTo: "09:00",
+    });
+    panelStore.setType(EnumPagesPanel.addCourse);
+    panelStore.setOpen(true);
   };
 
   return (

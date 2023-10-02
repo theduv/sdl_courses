@@ -2,24 +2,36 @@
 
 import CustomInput from "@/components/Global/CustomInput";
 import db from "@/firebase/firebaseInit";
+import Course from "@/interfaces/course.interface";
 import CustomDate from "@/interfaces/customDate.interface";
+import Store from "@/interfaces/store.interface";
+import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
 import { addDoc, collection } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import { HexColorPicker } from "react-colorful";
 
 const AddCourse = () => {
+  const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState("26-09-2023");
-  const [timeStart, setTimeStart] = useState("");
-  const [timeEnd, setTimeEnd] = useState("");
+  const [date, setDate] = useState<string>(panelStore.addCourseDefault.date);
+  const [timeStart, setTimeStart] = useState<string>(
+    panelStore.addCourseDefault.timeFrom
+  );
+  const [timeEnd, setTimeEnd] = useState(panelStore.addCourseDefault.timeTo);
   const [notes, setNotes] = useState("");
   const [colorText, setColorText] = useState("#000000");
   const [colorBackground, setColorBackground] = useState("#FFFFFF");
   const [pickText, setPickText] = useState<boolean>(false);
   const [pickBackground, setPickBackground] = useState<boolean>(false);
-  const refTextPicker = useRef(null);
-  const refBackgroundPicker = useRef(null);
+  const refTextPicker = useRef<HTMLDivElement>(null);
+  const refBackgroundPicker = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setDate(panelStore.addCourseDefault.date);
+    setTimeStart(panelStore.addCourseDefault.timeFrom);
+    setTimeEnd(panelStore.addCourseDefault.timeTo);
+  }, [panelStore.addCourseDefault]);
 
   useEffect(() => {
     const handleClickOutside = (e: any) => {

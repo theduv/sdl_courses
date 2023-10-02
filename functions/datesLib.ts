@@ -58,4 +58,20 @@ const arrayHours = [
   "18-19",
 ];
 
-export { getWeekAtDate, arrayHours, arrayMonths, getCustomDateFromDate };
+const arrayDays = [
+  "Lundi",
+  "Mardi",
+  "Mercredi",
+  "Jeudi",
+  "Vendredi",
+  "Samedi",
+  "Dimanche",
+];
+
+export {
+  getWeekAtDate,
+  arrayHours,
+  arrayMonths,
+  arrayDays,
+  getCustomDateFromDate,
+};
