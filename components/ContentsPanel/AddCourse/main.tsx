@@ -98,7 +98,7 @@ const AddCourse = () => {
     <div>
       <form
         onSubmit={onSubmitForm}
-        className="flex flex-col items-center justify-center space-y-4 p-4"
+        className="flex flex-col items-center justify-center space-y-2   p-4"
       >
         <CustomInput
           type="text"

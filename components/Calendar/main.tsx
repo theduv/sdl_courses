@@ -55,7 +55,7 @@ const Calendar = (props: CalendarProps) => {
       <div />
       {displayedDates.map((date: Date, index: number) => {
         return (
-          <div className="text-center w-56 font-bold mb-6" key={date.getTime()}>
+          <div className="text-center w-52 font-bold mb-6" key={date.getTime()}>
             {arrayDays[index]} {date.getDate()}{" "}
             {arrayMonths[date.getMonth()].substring(0, 3)}.
           </div>
