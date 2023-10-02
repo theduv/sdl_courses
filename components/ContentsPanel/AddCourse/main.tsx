@@ -144,7 +144,7 @@ const AddCourse = () => {
         </label>
         <div className="flex w-full justify-between items-center">
           <div className="flex flex-col">
-            <div>
+            <div className="relative">
               <h3
                 className="text-blue-500 cursor-pointer underline"
                 onClick={() => setPickText(true)}
@@ -152,13 +152,13 @@ const AddCourse = () => {
                 Modifier la couleur du texte
               </h3>
               <div
-                className={clsx("absolute", { hidden: !pickText })}
+                className={clsx("absolute bottom-6", { hidden: !pickText })}
                 ref={refTextPicker}
               >
                 <HexColorPicker color={colorText} onChange={setColorText} />
               </div>
             </div>
-            <div>
+            <div className="relative">
               <h3
                 className="text-blue-500 cursor-pointer underline"
                 onClick={() => setPickBackground(true)}
@@ -166,7 +166,9 @@ const AddCourse = () => {
                 Modifier la couleur du fond
               </h3>
               <div
-                className={clsx("absolute", { hidden: !pickBackground })}
+                className={clsx("absolute bottom-6 z-2", {
+                  hidden: !pickBackground,
+                })}
                 ref={refBackgroundPicker}
               >
                 <HexColorPicker
