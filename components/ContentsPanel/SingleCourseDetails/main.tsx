@@ -1,5 +1,5 @@
 import useRightPanelStore from "@/store/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonSave from "./ButtonSave";
 import ButtonDelete from "./ButtonDelete";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
@@ -42,6 +42,16 @@ const SingleCourseDetails = () => {
     setLinkValue(e.target.value);
   };
 
+  useEffect(() => {
+    setLinks(
+      panelStore.courseDetailsDefault.links
+        ? panelStore.courseDetailsDefault.links.split(";")
+        : []
+    );
+    setTitleValue(panelStore.courseDetailsDefault.title);
+    setNotesValue(panelStore.courseDetailsDefault.notes);
+  }, [panelStore.courseDetailsDefault]);
+
   const onClickSave = async () => {
     try {
       const ref = doc(db, "courses", panelStore.courseDetailsDefault.id);
@@ -73,7 +83,7 @@ const SingleCourseDetails = () => {
         className="rounded-lg bg-gray-600 p-4 w-full h-32"
       />
       <div>Liens vers les prises de notes</div>
-      {links.length !== 0 ? (
+      {links && links.length !== 0 ? (
         links.map((link: string) => (
           <a href={link} target="blank" className="text-blue-600 underline">
             {link}
