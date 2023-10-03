@@ -4,7 +4,7 @@ import ButtonSave from "./ButtonSave";
 import ButtonDelete from "./ButtonDelete";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
-import { toast } from "@/node_modules/react-toastify/dist/index";
+import { toast } from "react-toastify";
 
 const SingleCourseDetails = () => {
   const panelStore = useRightPanelStore((state: any) => ({
