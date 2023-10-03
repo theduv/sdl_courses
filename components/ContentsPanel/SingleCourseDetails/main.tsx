@@ -4,6 +4,7 @@ import ButtonSave from "./ButtonSave";
 import ButtonDelete from "./ButtonDelete";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
+import { toast } from "@/node_modules/react-toastify/dist/index";
 
 const SingleCourseDetails = () => {
   const panelStore = useRightPanelStore((state: any) => ({
@@ -34,6 +35,7 @@ const SingleCourseDetails = () => {
     try {
       const ref = doc(db, "courses", panelStore.courseDetailsDefault.id);
       await updateDoc(ref, { notes: notesValue, title: titleValue });
+      toast("Cours correctement modifié.");
     } catch (e) {
       console.log(e);
     }
