@@ -2,6 +2,8 @@ import useRightPanelStore from "@/store/store";
 import { useState } from "react";
 import ButtonSave from "./ButtonSave";
 import ButtonDelete from "./ButtonDelete";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+import db from "@/firebase/firebaseInit";
 
 const SingleCourseDetails = () => {
   const panelStore = useRightPanelStore((state: any) => ({
@@ -28,7 +30,14 @@ const SingleCourseDetails = () => {
     setTitleValue(e.target.value);
   };
 
-  console.log(links);
+  const onClickSave = async () => {
+    try {
+      const ref = doc(db, "courses", panelStore.courseDetailsDefault.id);
+      await updateDoc(ref, { notes: notesValue, title: titleValue });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <div className="flex flex-col space-y-4">
@@ -63,7 +72,7 @@ const SingleCourseDetails = () => {
         )}
       </ul>
       <div className="flex justify-between">
-        <ButtonSave />
+        <ButtonSave onClick={onClickSave} />
         <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />
       </div>
     </div>
