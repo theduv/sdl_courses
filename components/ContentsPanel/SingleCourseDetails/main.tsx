@@ -28,6 +28,8 @@ const SingleCourseDetails = () => {
     setTitleValue(e.target.value);
   };
 
+  console.log(links);
+
   return (
     <div className="flex flex-col space-y-4">
       <label>

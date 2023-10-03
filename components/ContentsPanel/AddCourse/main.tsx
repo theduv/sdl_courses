@@ -83,7 +83,7 @@ const AddCourse = () => {
         timeTo: JSON.stringify(dateEnd),
         backgroundColor: colorBackground,
         textColor: colorText,
-        links: `${link};`,
+        links: link.length !== 0 ? `${link};` : "",
       });
 
       setTitle("");
