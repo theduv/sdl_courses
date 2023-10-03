@@ -11,18 +11,25 @@ const SingleCourseDetails = () => {
     courseDetailsDefault: state.courseDetailsDefault,
   }));
 
-  const [notesValue, setNotesValue] = useState(
+  const [linkValue, setLinkValue] = useState<string>("");
+  const [notesValue, setNotesValue] = useState<string>(
     panelStore.courseDetailsDefault.notes
   );
 
-  const links = panelStore.courseDetailsDefault.links
-    ? panelStore.courseDetailsDefault.links.split(";")
-    : [];
+  const [links, setLinks] = useState<Array<string>>(
+    panelStore.courseDetailsDefault.links
+      ? panelStore.courseDetailsDefault.links.split(";")
+      : []
+  );
 
-  const [titleValue, setTitleValue] = useState(
+  const [titleValue, setTitleValue] = useState<string>(
     panelStore.courseDetailsDefault.title
   );
 
+  const onClickAddLink = () => {
+    setLinks((oldLinks: Array<string>) => [...oldLinks, linkValue]);
+    setLinkValue("");
+  };
   const onChangeValueNotes = (e: any) => {
     setNotesValue(e.target.value);
   };
@@ -31,10 +38,18 @@ const SingleCourseDetails = () => {
     setTitleValue(e.target.value);
   };
 
+  const onChangeLinkValue = (e: any) => {
+    setLinkValue(e.target.value);
+  };
+
   const onClickSave = async () => {
     try {
       const ref = doc(db, "courses", panelStore.courseDetailsDefault.id);
-      await updateDoc(ref, { notes: notesValue, title: titleValue });
+      await updateDoc(ref, {
+        notes: notesValue,
+        title: titleValue,
+        links: links.join(";"),
+      });
       toast("Cours correctement modifié.");
     } catch (e) {
       console.log(e);
@@ -58,21 +73,31 @@ const SingleCourseDetails = () => {
         className="rounded-lg bg-gray-600 p-4 w-full h-32"
       />
       <div>Liens vers les prises de notes</div>
-      <ul>
-        {panelStore.courseDetailsDefault.links ? (
-          links.map((link: string) => (
-            <li>
-              <a href={link} target="blank" className="text-blue-600 underline">
-                {link}
-              </a>
-            </li>
-          ))
-        ) : (
-          <h2 className="italic text-sm">
-            Aucun lien n'a encore été posté pour ce cours.
-          </h2>
-        )}
-      </ul>
+      {links.length !== 0 ? (
+        links.map((link: string) => (
+          <a href={link} target="blank" className="text-blue-600 underline">
+            {link}
+          </a>
+        ))
+      ) : (
+        <h2 className="italic text-sm">
+          Aucun lien n'a encore été posté pour ce cours.
+        </h2>
+      )}
+      <div className="flex space-x-6 items-center">
+        <h1>Ajouter un lien</h1>
+        <div className="flex space-x-2">
+          <input
+            value={linkValue}
+            onChange={onChangeLinkValue}
+            type="url"
+            className="px-4 py-2 rounded-lg bg-gray-600 text-gray-200"
+          />
+          <button className="text-2xl" onClick={onClickAddLink}>
+            +
+          </button>
+        </div>
+      </div>
       <div className="flex justify-between">
         <ButtonSave onClick={onClickSave} />
         <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />
