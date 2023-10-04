@@ -1,5 +1,5 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
-import { getCustomDateFromDate } from "@/functions/datesLib";
+import Store from "@/interfaces/store.interface";
 import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
 
@@ -10,23 +10,20 @@ interface ButtonAddCourse {
 }
 
 const ButtonAddCourse = (props: ButtonAddCourse) => {
-  const panelStore = useRightPanelStore((state: any) => ({
-    setOpen: state.setOpen,
-    setType: state.setType,
-    setAddCourseDefault: state.setAddCourseDefault,
-  }));
-  const formattedDate = props.targetDate
-    ? getCustomDateFromDate(props.targetDate)
-    : getCustomDateFromDate(new Date());
+  const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
 
   const onClickAddCourse = () => {
     panelStore.setType(EnumPagesPanel.addCourse);
     panelStore.setAddCourseDefault({
-      date: `${formattedDate.year}-${(formattedDate.month + 1)
-        .toString()
-        .padStart(2, "0")}-${formattedDate.date.toString().padStart(2, "0")}`,
-      timeFrom: `${props.hour.split("-")[0]}:00`,
-      timeTo: `${props.hour.split("-")[1]}:00`,
+      title: "",
+      teacher: "",
+      room: "",
+      date: "",
+      hourFrom: `${props.hour.split("-")[0]}:00`,
+      hourTo: `${props.hour.split("-")[1]}:00`,
+      links: [],
+      notes: "",
+      color: "bg-lime-600",
     });
     panelStore.setOpen(true);
   };

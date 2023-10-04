@@ -1,5 +1,6 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import Course from "@/interfaces/course.interface";
+import Store from "@/interfaces/store.interface";
 import useRightPanelStore from "@/store/store";
 import { AiOutlineLink } from "react-icons/ai";
 import { FaRegNoteSticky } from "react-icons/fa6";
@@ -9,26 +10,28 @@ interface ButtonCourseProps {
 }
 
 const ButtonCourse = (props: ButtonCourseProps) => {
-  const panelStore = useRightPanelStore((state: any) => ({
-    setOpen: state.setOpen,
-    setType: state.setType,
-    setCourseDetailsDefault: state.setCourseDetailsDefault,
-  }));
+  const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
 
   const onClickDetailsCourse = () => {
     panelStore.setOpen(true);
     panelStore.setType(EnumPagesPanel.singleCourseDetails);
-    panelStore.setCourseDetailsDefault({
-      title: props.course.title,
-      notes: props.course.notes,
+    panelStore.setAddCourseDefault({
       id: props.course.id,
-      links: props.course.links,
+      title: props.course.title,
+      teacher: props.course.teacher ?? "",
+      notes: "",
+      room: props.course.room ?? "",
+      date: `${props.course.timeFrom.year}-${props.course.timeFrom.month
+        .toString()
+        .padStart(2, "0")}-${props.course.timeFrom.date
+        .toString()
+        .padStart(2, "0")}`,
+      hourFrom: `${props.course.timeFrom.hour.toString().padStart(2, "0")}:00`,
+      hourTo: `${props.course.timeTo.hour.toString().padStart(2, "0")}:00`,
+      links: props.course.links ? props.course.links.split(";") : [],
+      color: props.course.color ?? "bg-lime-600",
     });
   };
-
-  if (props.course.title === "Linguistique générale") {
-    console.log(props.course.links);
-  }
 
   return (
     <button

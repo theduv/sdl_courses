@@ -2,6 +2,8 @@ import CustomDate from "./customDate.interface";
 
 interface Course {
   title: string;
+  teacher?: string;
+  room?: string;
   notes: string;
   id: string;
   timeFrom: CustomDate;

@@ -5,7 +5,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 interface ButtonDeleteProps {
-  courseID: string;
+  courseID?: string;
 }
 
 const ButtonDelete = (props: ButtonDeleteProps) => {
@@ -13,6 +13,7 @@ const ButtonDelete = (props: ButtonDeleteProps) => {
 
   const onClickDeleteCourse = async () => {
     try {
+      if (props.courseID == undefined) return;
       await deleteDoc(doc(db, "courses", props.courseID));
       toast("Cours correctement supprimé.");
       panelStore.setType(EnumPagesPanel.addCourse);

@@ -8,28 +8,25 @@ import { toast } from "react-toastify";
 import CustomInput from "@/components/Global/CustomInput";
 import Divider from "../AddCourse/Divider";
 import ColorPicker from "../AddCourse/ColorPicker";
+import Store from "@/interfaces/store.interface";
 
 const SingleCourseDetails = () => {
-  const panelStore = useRightPanelStore((state: any) => ({
-    courseDetailsDefault: state.courseDetailsDefault,
-  }));
+  const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
 
   const [linkValue, setLinkValue] = useState<string>("");
   const [notesValue, setNotesValue] = useState<string>(
-    panelStore.courseDetailsDefault.notes
+    panelStore.addCourseDefault.notes
   );
 
   const [links, setLinks] = useState<Array<string>>(
-    panelStore.courseDetailsDefault.links
-      ? panelStore.courseDetailsDefault.links.split(";")
-      : []
+    panelStore.addCourseDefault.links ? panelStore.addCourseDefault.links : []
   );
   const [color, setColor] = useState(
-    panelStore.courseDetailsDefault.color ?? "bg-lime-700"
+    panelStore.addCourseDefault.color ?? "bg-lime-700"
   );
 
   const [titleValue, setTitleValue] = useState<string>(
-    panelStore.courseDetailsDefault.title
+    panelStore.addCourseDefault.title
   );
 
   const onClickAddLink = () => {
@@ -49,17 +46,16 @@ const SingleCourseDetails = () => {
 
   useEffect(() => {
     setLinks(
-      panelStore.courseDetailsDefault.links
-        ? panelStore.courseDetailsDefault.links.split(";")
-        : []
+      panelStore.addCourseDefault.links ? panelStore.addCourseDefault.links : []
     );
-    setTitleValue(panelStore.courseDetailsDefault.title);
-    setNotesValue(panelStore.courseDetailsDefault.notes);
-  }, [panelStore.courseDetailsDefault]);
+    setTitleValue(panelStore.addCourseDefault.title);
+    setNotesValue(panelStore.addCourseDefault.notes);
+  }, [panelStore.addCourseDefault]);
 
   const onClickSave = async () => {
     try {
-      const ref = doc(db, "courses", panelStore.courseDetailsDefault.id);
+      if (panelStore.addCourseDefault.id == undefined) return;
+      const ref = doc(db, "courses", panelStore.addCourseDefault.id);
       await updateDoc(ref, {
         notes: notesValue,
         title: titleValue,
@@ -122,7 +118,7 @@ const SingleCourseDetails = () => {
       <Divider />
       <div className="flex space-x-4">
         <ButtonSave onClick={onClickSave} />
-        <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />
+        <ButtonDelete courseID={panelStore.addCourseDefault.id} />
       </div>
     </div>
   );

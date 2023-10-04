@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import SingleDate from "./SingleDate";
-import PlaceholderDates from "./placeholderDates";
+import PlaceholderDates from "./PlaceholderDates";
 
 interface TopDatesProps {
   displayedDates: Array<Date>;
