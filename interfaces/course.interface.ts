@@ -2,11 +2,11 @@ import CustomDate from "./customDate.interface";
 
 interface Course {
   title: string;
-  notes?: string;
+  notes: string;
   id: string;
   timeFrom: CustomDate;
   timeTo: CustomDate;
-  links?: Array<string>;
+  links?: string;
   backgroundColor?: string;
   textColor?: string;
 }

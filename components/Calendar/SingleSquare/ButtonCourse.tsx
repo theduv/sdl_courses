@@ -26,6 +26,10 @@ const ButtonCourse = (props: ButtonCourseProps) => {
     });
   };
 
+  if (props.course.title === "Linguistique générale") {
+    console.log(props.course.links);
+  }
+
   return (
     <button
       key={props.course.id}
@@ -41,8 +45,10 @@ const ButtonCourse = (props: ButtonCourseProps) => {
         {props.course.title}
       </p>
       <div className="flex items-center space-x-1">
-        {props.course.links?.length !== 0 && <AiOutlineLink />}
-        {props.course.notes?.length !== 0 && <FaRegNoteSticky />}
+        {props.course.links && props.course.links.length !== 0 && (
+          <AiOutlineLink />
+        )}
+        {props.course.notes.length !== 0 && <FaRegNoteSticky />}
       </div>
     </button>
   );
