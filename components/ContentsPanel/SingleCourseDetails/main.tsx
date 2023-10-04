@@ -5,6 +5,8 @@ import ButtonDelete from "./ButtonDelete";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
 import { toast } from "react-toastify";
+import CustomInput from "@/components/Global/CustomInput";
+import Divider from "../AddCourse/Divider";
 
 const SingleCourseDetails = () => {
   const panelStore = useRightPanelStore((state: any) => ({
@@ -68,21 +70,22 @@ const SingleCourseDetails = () => {
 
   return (
     <div className="flex flex-col space-y-4">
-      <label>
-        <h1>Titre</h1>
-        <input
-          className="rounded-lg bg-gray-600 text-gray-200 p-2 text-xl"
-          value={titleValue}
-          onChange={onChangeValueTitle}
-        />
-      </label>
+      <CustomInput
+        type="text"
+        value={titleValue}
+        onChange={(e) => setTitleValue(e.target.value)}
+        placeholder="Titre du cours"
+      />
+      <Divider />
       <h3>Notes</h3>
       <textarea
+        placeholder="Notes additionnelles (prof absent, changement de salle...)"
         value={notesValue}
         onChange={onChangeValueNotes}
         className="rounded-lg bg-gray-600 p-4 w-full h-32"
       />
-      <div>Liens vers les prises de notes</div>
+      <Divider />
+      <div>Lien(s) vers les prises de notes</div>
       {links && links.length !== 0 ? (
         links.map((link: string) => (
           <a href={link} target="blank" className="text-blue-600 underline">
@@ -98,6 +101,7 @@ const SingleCourseDetails = () => {
         <h1>Ajouter un lien</h1>
         <div className="flex space-x-2">
           <input
+            placeholder="Lien google drive, dropbox..."
             value={linkValue}
             onChange={onChangeLinkValue}
             type="url"
@@ -108,7 +112,8 @@ const SingleCourseDetails = () => {
           </button>
         </div>
       </div>
-      <div className="flex justify-between">
+      <Divider />
+      <div className="flex space-x-4">
         <ButtonSave onClick={onClickSave} />
         <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />
       </div>

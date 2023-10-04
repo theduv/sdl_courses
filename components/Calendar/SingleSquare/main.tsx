@@ -4,7 +4,7 @@ import { GetCoursesAtTime } from "@/functions/getCoursesAtTime";
 import Course from "@/interfaces/course.interface";
 import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
-import { Dispatch, SetStateAction, useRef, useState } from "react";
+import { useState } from "react";
 import ButtonCourse from "./ButtonCourse";
 
 interface SingleSquareProps {

@@ -146,7 +146,7 @@ const AddCourse = () => {
         />
         <Divider />
         <div className="flex flex-col space-y-4">
-          <h2>Lien(s) de prise de notes</h2>
+          <h2>Lien(s) vers les prises de notes</h2>
           {links.length !== 0 ? (
             <div className="flex flex-col h-8 overflow-y-auto border rounded lg p-1 border-opacity-40 border-white w-1/2 truncate ">
               {links.map((link) => (
