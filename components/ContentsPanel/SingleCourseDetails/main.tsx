@@ -75,13 +75,14 @@ const SingleCourseDetails = () => {
   return (
     <div className="flex flex-col space-y-4 p-4">
       <CustomInput
+        required={true}
         type="text"
         value={titleValue}
         onChange={(e) => setTitleValue(e.target.value)}
         placeholder="Titre du cours"
       />
       <Divider />
-      <h3>Notes</h3>
+      <h3>Notes additionnelles</h3>
       <textarea
         placeholder="Notes additionnelles (prof absent, changement de salle...)"
         value={notesValue}
@@ -118,6 +119,7 @@ const SingleCourseDetails = () => {
       </div>
       <Divider />
       <ColorPicker color={color} setColor={setColor} />
+      <Divider />
       <div className="flex space-x-4">
         <ButtonSave onClick={onClickSave} />
         <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />

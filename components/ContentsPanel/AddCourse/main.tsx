@@ -113,12 +113,16 @@ const AddCourse = () => {
         type="time"
         step="3600"
       />
-      <textarea
-        value={notes}
-        onChange={(e) => setNotes(e.target.value)}
-        placeholder="Notes additionnelles (prof absent, changement de salle...)"
-        className="rounded-lg bg-gray-600 p-4 w-full h-32"
-      />
+      <Divider />
+      <label className="flex flex-col space-y-2">
+        <h2>Notes additionnelles</h2>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder="Notes additionnelles (prof absent, changement de salle...)"
+          className="rounded-lg bg-gray-600 p-4 w-full h-32"
+        />
+      </label>
       <Divider />
       <div className="flex flex-col space-y-4">
         <h2>Lien(s) vers les prises de notes</h2>
@@ -160,7 +164,7 @@ const AddCourse = () => {
       <button
         disabled={title.length === 0}
         type="submit"
-        className={clsx("rounded-lg w-1/2 px-6 py-2", {
+        className={clsx("rounded-lg w-1/3 px-6 py-2", {
           "bg-gray-300 cursor-default text-gray-400": title.length === 0,
           "bg-blue-600": title.length !== 0,
         })}
