@@ -35,13 +35,15 @@ const ButtonCourse = (props: ButtonCourseProps) => {
       }}
       title={props.course.title}
       onClick={onClickDetailsCourse}
-      className="h-full w-0 rounded-md flex-1 items-center justify-center flex"
+      className="h-full w-0 rounded-md flex-1 items-center justify-center flex p-1 space-x-2"
     >
-      <p className="text-ellipsis overflow-hidden whitespace-nowrap p-1">
+      <p className="text-ellipsis overflow-hidden whitespace-nowrap">
         {props.course.title}
       </p>
-      {props.course.links?.length !== 0 && <AiOutlineLink />}
-      {props.course.notes?.length !== 0 && <FaRegNoteSticky />}
+      <div className="flex items-center space-x-1">
+        {props.course.links?.length !== 0 && <AiOutlineLink />}
+        {props.course.notes?.length !== 0 && <FaRegNoteSticky />}
+      </div>
     </button>
   );
 };

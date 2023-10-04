@@ -11,8 +11,9 @@ import SingleSquare from "./SingleSquare/main";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
-import SingleDate from "./TopDates/SingleDate/main";
+import SingleDate from "./TopDates/SingleDate";
 import TopDates from "./TopDates/main";
+import CoursesSlot from "./CoursesSlots/main";
 
 interface CalendarProps {
   currentDate: Date;
@@ -56,48 +57,7 @@ const Calendar = (props: CalendarProps) => {
     <div className="grid grid-cols-6">
       <div />
       <TopDates displayedDates={displayedDates} />
-      {arrayHours.map((hour: string, index: number) => {
-        return (
-          <Fragment key={hour}>
-            <div className="items-center flex justify-center">{hour}</div>
-            <SingleSquare
-              index={index}
-              coursesList={coursesList}
-              displayedDates={displayedDates}
-              hour={hour}
-              indexSquare={0}
-            />
-            <SingleSquare
-              index={index}
-              coursesList={coursesList}
-              displayedDates={displayedDates}
-              hour={hour}
-              indexSquare={1}
-            />
-            <SingleSquare
-              index={index}
-              coursesList={coursesList}
-              displayedDates={displayedDates}
-              hour={hour}
-              indexSquare={2}
-            />
-            <SingleSquare
-              index={index}
-              coursesList={coursesList}
-              displayedDates={displayedDates}
-              hour={hour}
-              indexSquare={3}
-            />
-            <SingleSquare
-              index={index}
-              coursesList={coursesList}
-              displayedDates={displayedDates}
-              hour={hour}
-              indexSquare={4}
-            />
-          </Fragment>
-        );
-      })}
+      <CoursesSlot displayedDates={displayedDates} coursesList={coursesList} />
     </div>
   );
 };
