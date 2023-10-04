@@ -33,15 +33,14 @@ const SingleCourseDetails = () => {
   );
 
   const onClickAddLink = () => {
+    if (linkValue.length === 0) {
+      return;
+    }
     setLinks((oldLinks: Array<string>) => [...oldLinks, linkValue]);
     setLinkValue("");
   };
   const onChangeValueNotes = (e: any) => {
     setNotesValue(e.target.value);
-  };
-
-  const onChangeValueTitle = (e: any) => {
-    setTitleValue(e.target.value);
   };
 
   const onChangeLinkValue = (e: any) => {
