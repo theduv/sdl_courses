@@ -7,6 +7,7 @@ import db from "@/firebase/firebaseInit";
 import { toast } from "react-toastify";
 import CustomInput from "@/components/Global/CustomInput";
 import Divider from "../AddCourse/Divider";
+import ColorPicker from "../AddCourse/ColorPicker";
 
 const SingleCourseDetails = () => {
   const panelStore = useRightPanelStore((state: any) => ({
@@ -22,6 +23,9 @@ const SingleCourseDetails = () => {
     panelStore.courseDetailsDefault.links
       ? panelStore.courseDetailsDefault.links.split(";")
       : []
+  );
+  const [color, setColor] = useState(
+    panelStore.courseDetailsDefault.color ?? "bg-lime-700"
   );
 
   const [titleValue, setTitleValue] = useState<string>(
@@ -61,6 +65,7 @@ const SingleCourseDetails = () => {
         notes: notesValue,
         title: titleValue,
         links: links.join(";"),
+        color: color,
       });
       toast("Cours correctement modifié.");
     } catch (e) {
@@ -113,6 +118,7 @@ const SingleCourseDetails = () => {
         </div>
       </div>
       <Divider />
+      <ColorPicker color={color} setColor={setColor} />
       <div className="flex space-x-4">
         <ButtonSave onClick={onClickSave} />
         <ButtonDelete courseID={panelStore.courseDetailsDefault.id} />

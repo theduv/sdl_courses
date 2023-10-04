@@ -1,17 +1,9 @@
 "use client";
-import {
-  arrayDays,
-  arrayHours,
-  arrayMonths,
-  getWeekAtDate,
-} from "@/functions/datesLib";
+import { getWeekAtDate } from "@/functions/datesLib";
 import Course from "@/interfaces/course.interface";
-import { Fragment, useEffect, useState } from "react";
-import SingleSquare from "./SingleSquare/main";
+import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
-import EnumPagesPanel from "@/enums/enumPagesPanel";
-import SingleDate from "./TopDates/SingleDate";
 import TopDates from "./TopDates/main";
 import CoursesSlot from "./CoursesSlots/main";
 
@@ -32,9 +24,8 @@ const Calendar = (props: CalendarProps) => {
         notes: doc.data().notes,
         timeFrom: JSON.parse(doc.data().timeFrom),
         timeTo: JSON.parse(doc.data().timeTo),
-        textColor: doc.data().textColor,
         links: doc.data().links,
-        backgroundColor: doc.data().backgroundColor,
+        color: doc.data().color,
       }));
       const removedDuplicates: Array<any> = [];
       newDocs.forEach((doc) => {
@@ -42,7 +33,7 @@ const Calendar = (props: CalendarProps) => {
           return;
         removedDuplicates.push(doc);
       });
-      setCoursesList((oldList) => [...removedDuplicates]);
+      setCoursesList(removedDuplicates);
     });
     return () => {
       unsub();

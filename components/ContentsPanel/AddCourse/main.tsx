@@ -8,9 +8,9 @@ import { toast } from "react-toastify";
 import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
 import { addDoc, collection } from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
-import { HexColorPicker } from "react-colorful";
+import { useEffect, useState } from "react";
 import Divider from "./Divider";
+import ColorPicker from "./ColorPicker";
 
 const AddCourse = () => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
@@ -21,14 +21,17 @@ const AddCourse = () => {
   );
   const [timeEnd, setTimeEnd] = useState(panelStore.addCourseDefault.timeTo);
   const [notes, setNotes] = useState("");
-  const [colorText, setColorText] = useState("#000000");
-  const [colorBackground, setColorBackground] = useState("#FFFFFF");
-  const [pickText, setPickText] = useState<boolean>(false);
-  const [pickBackground, setPickBackground] = useState<boolean>(false);
   const [links, setLinks] = useState<Array<string>>([]);
   const [linkValue, setLinkValue] = useState<string>("");
-  const refTextPicker = useRef<HTMLDivElement>(null);
-  const refBackgroundPicker = useRef<HTMLDivElement>(null);
+  const [color, setColor] = useState<string>("bg-lime-700");
+
+  const resetForm = () => {
+    setTitle("");
+    setNotes("");
+    setColor("bg-lime-600");
+    toast("Cours correctement ajouté");
+    setLinks([]);
+  };
 
   const onClickAddLink = () => {
     setLinks((oldLinks) => [...oldLinks, linkValue]);
@@ -40,27 +43,6 @@ const AddCourse = () => {
     setTimeStart(panelStore.addCourseDefault.timeFrom);
     setTimeEnd(panelStore.addCourseDefault.timeTo);
   }, [panelStore.addCourseDefault]);
-
-  useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (refTextPicker === null || refBackgroundPicker === null) return;
-      if (refTextPicker.current && !refTextPicker.current.contains(e.target)) {
-        setPickText(false);
-      }
-      if (
-        refBackgroundPicker.current &&
-        !refBackgroundPicker.current.contains(e.target)
-      ) {
-        setPickBackground(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [refBackgroundPicker]);
 
   const onChangeLinkValue = (e: any) => {
     setLinkValue(e.target.value);
@@ -88,15 +70,10 @@ const AddCourse = () => {
         notes: notes,
         timeFrom: JSON.stringify(dateStart),
         timeTo: JSON.stringify(dateEnd),
-        backgroundColor: colorBackground,
-        textColor: colorText,
+        color: color,
         links: links.join(";"),
       });
-
-      setTitle("");
-      setNotes("");
-      toast("Cours correctement ajouté");
-      setLinks([]);
+      resetForm();
     } catch (e) {
       console.log(e);
     }
@@ -105,7 +82,7 @@ const AddCourse = () => {
   return (
     <form
       onSubmit={onSubmitForm}
-      className="flex flex-col  justify-center space-y-2 p-4"
+      className="flex flex-col justify-center space-y-2 p-4"
     >
       <CustomInput
         type="text"
@@ -121,7 +98,6 @@ const AddCourse = () => {
         type="date"
       />
       <Divider />
-
       <CustomInput
         value={timeStart}
         onChange={(e) => setTimeStart(e.target.value)}
@@ -178,47 +154,7 @@ const AddCourse = () => {
       </div>
       <Divider />
       <div className="flex w-full justify-between items-center">
-        <div className="flex flex-col">
-          <div className="relative">
-            <h3
-              className="text-blue-500 cursor-pointer underline"
-              onClick={() => setPickText(true)}
-            >
-              Modifier la couleur du texte
-            </h3>
-            <div
-              className={clsx("absolute bottom-6", { hidden: !pickText })}
-              ref={refTextPicker}
-            >
-              <HexColorPicker color={colorText} onChange={setColorText} />
-            </div>
-          </div>
-          <div className="relative">
-            <h3
-              className="text-blue-500 cursor-pointer underline"
-              onClick={() => setPickBackground(true)}
-            >
-              Modifier la couleur du fond
-            </h3>
-            <div
-              className={clsx("absolute bottom-6 z-2", {
-                hidden: !pickBackground,
-              })}
-              ref={refBackgroundPicker}
-            >
-              <HexColorPicker
-                color={colorBackground}
-                onChange={setColorBackground}
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          style={{ backgroundColor: colorBackground, color: colorText }}
-          className="rounded-lg px-4 py-2 p-1"
-        >
-          Example
-        </div>
+        <ColorPicker color={color} setColor={setColor} />
       </div>
       <Divider />
       <button

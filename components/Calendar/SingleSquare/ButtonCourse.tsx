@@ -32,14 +32,13 @@ const ButtonCourse = (props: ButtonCourseProps) => {
 
   return (
     <button
+      className={
+        "h-full w-0 rounded-md flex-1 items-center justify-center flex p-1 space-x-2 text-white " +
+        (props.course.color ? props.course.color : "bg-black")
+      }
       key={props.course.id}
-      style={{
-        backgroundColor: props.course.backgroundColor ?? "#FFFFFF",
-        color: props.course.textColor ?? "#000000",
-      }}
       title={props.course.title}
       onClick={onClickDetailsCourse}
-      className="h-full w-0 rounded-md flex-1 items-center justify-center flex p-1 space-x-2"
     >
       <p className="text-ellipsis overflow-hidden whitespace-nowrap">
         {props.course.title}

@@ -9,6 +9,7 @@ interface Course {
   links?: string;
   backgroundColor?: string;
   textColor?: string;
+  color?: string;
 }
 
 export default Course;
