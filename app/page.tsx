@@ -14,7 +14,7 @@ export default function Home() {
       <TopMenu setCurrentDate={setCurrentDate} />
       <Calendar currentDate={currentDate} />
       <RightPanel />
-      <ToastContainer position="bottom-right" />
+      <ToastContainer position="bottom-right" theme="colored" />
     </main>
   );
 }

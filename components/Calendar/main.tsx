@@ -11,6 +11,8 @@ import SingleSquare from "./SingleSquare/main";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
+import SingleDate from "./TopDates/SingleDate/main";
+import TopDates from "./TopDates/main";
 
 interface CalendarProps {
   currentDate: Date;
@@ -53,17 +55,7 @@ const Calendar = (props: CalendarProps) => {
   return (
     <div className="grid grid-cols-6">
       <div />
-      {displayedDates.map((date: Date, index: number) => {
-        return (
-          <div
-            className="text-center w-52 font-bold mb-6 bg-orange-400 p-2 rounded-md text-white border border-gray-700 bg-opacity-40  "
-            key={date.getTime()}
-          >
-            {arrayDays[index]} {date.getDate()}{" "}
-            {arrayMonths[date.getMonth()].substring(0, 3)}.
-          </div>
-        );
-      })}
+      <TopDates displayedDates={displayedDates} />
       {arrayHours.map((hour: string, index: number) => {
         return (
           <Fragment key={hour}>

@@ -69,7 +69,7 @@ const SingleCourseDetails = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex flex-col space-y-4 p-4">
       <CustomInput
         type="text"
         value={titleValue}
