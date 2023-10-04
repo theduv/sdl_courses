@@ -6,7 +6,7 @@ interface Course {
   id: string;
   timeFrom: CustomDate;
   timeTo: CustomDate;
-  links?: [string];
+  links?: Array<string>;
   backgroundColor?: string;
   textColor?: string;
 }

@@ -148,15 +148,17 @@ const AddCourse = () => {
         <div className="flex flex-col space-y-4">
           <h2>Lien(s) de prise de notes</h2>
           {links.length !== 0 ? (
-            links.map((link) => (
-              <a
-                className="text-blue-600 underline text-sm"
-                href="link"
-                key={`Link to ${link}`}
-              >
-                {link}
-              </a>
-            ))
+            <div className="flex flex-col h-8 overflow-y-auto border rounded lg p-1 border-opacity-40 border-white w-1/2 truncate ">
+              {links.map((link) => (
+                <a
+                  className="text-blue-600 underline text-sm"
+                  href="link"
+                  key={`Link to ${link}`}
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
           ) : (
             <h4 className="italic text-sm">
               Aucun lien n'a encore été posté pour ce cours.
