@@ -23,7 +23,7 @@ const ButtonDelete = (props: ButtonDeleteProps) => {
   return (
     <button
       onClick={onClickDeleteCourse}
-      className="px-4 py-2 rounded-lg bg-red-600 text-white font-bold"
+      className="px-4 py-2 rounded-lg bg-red-600"
     >
       Supprimer le cours
     </button>
