@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { Dispatch, SetStateAction } from "react";
 
 const colorChoices = [
   "bg-lime-700",

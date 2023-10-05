@@ -17,7 +17,7 @@ const ButtonAddCourse = (props: ButtonAddCourse) => {
   console.log(props.hour);
   const onClickAddCourse = () => {
     panelStore.setType(EnumPagesPanel.addCourse);
-    panelStore.setAddCourseDefault({
+    panelStore.setFormContent({
       title: "",
       teacher: "",
       room: "",

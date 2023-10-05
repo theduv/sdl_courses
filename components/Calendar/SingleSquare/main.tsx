@@ -1,8 +1,5 @@
-import EnumPagesPanel from "@/enums/enumPagesPanel";
-import { getCustomDateFromDate } from "@/functions/datesLib";
 import { GetCoursesAtTime } from "@/functions/getCoursesAtTime";
 import Course from "@/interfaces/course.interface";
-import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
 import { useState } from "react";
 import ButtonCourse from "./ButtonCourse";
@@ -43,7 +40,7 @@ const SingleSquare = (props: SingleSquareProps) => {
         <ButtonCourse key={`${course.id} course Link`} course={course} />
       ))}
       <ButtonAddCourse
-        hour={props.hour.replaceAll("h", "").replaceAll(" ", "")}
+        hour={props.hour.replaceAll("h", "").replaceAll(" ", "")} // turning "08h - 09h" to "08-09"
         hovered={hovered}
         targetDate={targetDate}
       />

@@ -5,10 +5,10 @@ import { create } from "zustand";
 const today = new Date();
 const formattedToday = getCustomDateFromDate(today);
 
-const useRightPanelStore = create((set) => ({
+const useRightPanelStore = create((set: any) => ({
   type: EnumPagesPanel.addCourse,
   isOpen: false,
-  addCourseDefault: {
+  formContent: {
     title: "",
     teacher: "",
     room: "",
@@ -23,7 +23,7 @@ const useRightPanelStore = create((set) => ({
   },
   setType: (value: EnumPagesPanel) => set({ type: value }),
   setOpen: (value: boolean) => set({ isOpen: value }),
-  setAddCourseDefault: (value: any) => set({ addCourseDefault: value }),
+  setFormContent: (value: any) => set({ formContent: value }),
 }));
 
 export default useRightPanelStore;
