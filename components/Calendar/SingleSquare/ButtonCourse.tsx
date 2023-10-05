@@ -18,8 +18,8 @@ const ButtonCourse = (props: ButtonCourseProps) => {
     panelStore.setAddCourseDefault({
       id: props.course.id,
       title: props.course.title,
-      teacher: props.course.teacher ?? "",
-      notes: "",
+      teacher: props.course.teacher ? props.course.teacher : "",
+      notes: props.course.notes,
       room: props.course.room ?? "",
       date: `${props.course.timeFrom.year}-${props.course.timeFrom.month
         .toString()
@@ -29,6 +29,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
       hourFrom: `${props.course.timeFrom.hour.toString().padStart(2, "0")}:00`,
       hourTo: `${props.course.timeTo.hour.toString().padStart(2, "0")}:00`,
       links: props.course.links ? props.course.links.split(";") : [],
+      link: "",
       color: props.course.color ?? "bg-lime-600",
     });
   };
@@ -36,16 +37,29 @@ const ButtonCourse = (props: ButtonCourseProps) => {
   return (
     <button
       className={
-        "h-full w-0 rounded-md flex-1 items-center justify-center flex p-1 space-x-2 text-white " +
-        (props.course.color ? props.course.color : "bg-black")
+        "h-full w-0 rounded-md flex-1 items-center justify-between flex p-1 space-x-2 text-white " +
+        props.course.color
       }
       key={props.course.id}
       title={props.course.title}
       onClick={onClickDetailsCourse}
     >
-      <p className="text-ellipsis overflow-hidden whitespace-nowrap">
-        {props.course.title}
-      </p>
+      <div />
+      <div className="flex flex-col w-0 flex-1">
+        <p className="text-ellipsis overflow-hidden whitespace-nowrap">
+          {props.course.title}
+        </p>
+        {((props.course.room && props.course.room.length !== 0) ||
+          (props.course.teacher && props.course.teacher.length !== 0)) && (
+          <p className="text-xs italic text-ellipsis overflow-hidden whitespace-nowrap">
+            {props.course.room}{" "}
+            {props.course.room?.length !== 0 &&
+              props.course.teacher?.length !== 0 &&
+              "-"}{" "}
+            {props.course.teacher}
+          </p>
+        )}
+      </div>
       <div className="flex items-center space-x-1">
         {props.course.links && props.course.links.length !== 0 && (
           <AiOutlineLink />

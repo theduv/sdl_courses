@@ -5,6 +5,7 @@ interface ButtonSaveProps {
 const ButtonSave = (props: ButtonSaveProps) => {
   return (
     <button
+      type="button"
       onClick={props.onClick}
       className="px-4 py-2 rounded-lg bg-blue-600"
     >

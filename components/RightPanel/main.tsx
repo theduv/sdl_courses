@@ -9,13 +9,12 @@ const RightPanel = () => {
   return (
     <div
       className={clsx(
-        "bg-gray-800 fixed right-0 transition ease-in-out rounded-l-lg p-4 flex flex-col space-y-4",
+        "bg-gray-800 overflow-y-auto fixed right-0 h-4/5 w-2/5 transition ease-in-out rounded-l-lg p-4 flex flex-col scrollbar scrollbar-thumb-gray-600 scrollbar-thumb-rounded scrollbar-track-gray-100 scrollbar-track-rounded ",
         {
           "ease-in duration-300 translate-x-0 ": panelStore.isOpen,
           "translate-x-full": !panelStore.isOpen,
         }
       )}
-      style={{ height: "90%", width: "30%" }}
     >
       <RightPanelHeader />
       <AddCourse />

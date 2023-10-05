@@ -1,4 +1,5 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
+import { getCustomDateFromDate } from "@/functions/datesLib";
 import Store from "@/interfaces/store.interface";
 import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
@@ -11,6 +12,7 @@ interface ButtonAddCourse {
 
 const ButtonAddCourse = (props: ButtonAddCourse) => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
+  const formattedDate = getCustomDateFromDate(props.targetDate ?? new Date());
 
   const onClickAddCourse = () => {
     panelStore.setType(EnumPagesPanel.addCourse);
@@ -18,10 +20,13 @@ const ButtonAddCourse = (props: ButtonAddCourse) => {
       title: "",
       teacher: "",
       room: "",
-      date: "",
+      date: `${formattedDate.year}-${(formattedDate.month + 1)
+        .toString()
+        .padStart(2, "0")}-${formattedDate.date.toString().padStart(2, "0")}`,
       hourFrom: `${props.hour.split("-")[0]}:00`,
       hourTo: `${props.hour.split("-")[1]}:00`,
       links: [],
+      link: "",
       notes: "",
       color: "bg-lime-600",
     });

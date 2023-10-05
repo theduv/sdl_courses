@@ -13,9 +13,13 @@ import Divider from "./Divider";
 import ColorPicker from "./ColorPicker";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import FormCourse from "@/interfaces/formCourse.interface";
+import ButtonSave from "../SingleCourseDetails/ButtonSave";
+import ButtonDelete from "../SingleCourseDetails/ButtonDelete";
 
 const AddCourse = () => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
+
+  console.log(panelStore);
 
   const [formValues, setFormValues] = useState<FormCourse>({
     ...panelStore.addCourseDefault,
@@ -39,6 +43,24 @@ const AddCourse = () => {
 
   const onChangeLinkValue = (e: any) => {
     setFormValues((oldForm) => ({ ...oldForm, link: e.target.value }));
+  };
+
+  const onClickSaveChanges = async () => {
+    try {
+      if (panelStore.addCourseDefault.id == undefined) return;
+      const ref = doc(db, "courses", panelStore.addCourseDefault.id);
+      await updateDoc(ref, {
+        teacher: formValues.teacher,
+        room: formValues.room,
+        notes: formValues.notes,
+        title: formValues.title,
+        links: formValues.links.join(";"),
+        color: formValues.color,
+      });
+      toast("Cours correctement modifié.");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onSubmitForm = async (e: any) => {
@@ -71,8 +93,25 @@ const AddCourse = () => {
       } else {
         if (panelStore.addCourseDefault.id) {
           const ref = doc(db, "courses", panelStore.addCourseDefault.id);
+          const dateFrom = {
+            year: formValues.date.split("-")[0],
+            month: parseInt(formValues.date.split("-")[1]) - 1,
+            date: parseInt(formValues.date.split("-")[2]),
+            hour: formValues.hourFrom,
+          };
+          const dateTo = {
+            year: formValues.date.split("-")[0],
+            month: parseInt(formValues.date.split("-")[1]) - 1,
+            date: parseInt(formValues.date.split("-")[2]),
+            hour: formValues.hourTo,
+          };
+
           await updateDoc(ref, {
+            room: formValues.room,
+            teacher: formValues.teacher,
             notes: formValues.notes,
+            timeFrom: JSON.stringify(dateFrom),
+            timeTo: JSON.stringify(dateTo),
             title: formValues.title,
             links: formValues.links.join(";"),
             color: formValues.color,
@@ -89,39 +128,49 @@ const AddCourse = () => {
   return (
     <form
       onSubmit={onSubmitForm}
-      className="flex flex-col justify-center space-y-2 p-4 overflow-y-scroll scrollbar scrollbar-thumb-gray-600 scrollbar-thumb-rounded scrollbar-track-gray-100 scrollbar-track-rounded"
+      className="flex flex-col p-4 justify-center space-y-2 scrollbar scrollbar-thumb-gray-600 scrollbar-thumb-rounded scrollbar-track-gray-100 scrollbar-track-rounded"
     >
       <CustomInput
         type="text"
         placeholder="Titre du cours"
         value={formValues.title}
-        onChange={(e) => setFormValues((oldForm) => ({...oldForm, title: e.target.value})}
+        onChange={(e) =>
+          setFormValues((oldForm) => ({ ...oldForm, title: e.target.value }))
+        }
       ></CustomInput>
       <Divider />
       <CustomInput
         type="text"
-        placeholder="Professeur"
+        placeholder="Professeur.e"
         value={formValues.teacher}
-        onChange={(e) => setTeacherValue(e.target.value)}
+        onChange={(e) =>
+          setFormValues((oldForm) => ({ ...oldForm, teacher: e.target.value }))
+        }
       />
       <Divider />
       <CustomInput
         type="text"
         placeholder="Salle / amphithéâtre"
         value={formValues.room}
-        onChange={(e) => setRoomValue(e.target.value)}
+        onChange={(e) =>
+          setFormValues((oldForm) => ({ ...oldForm, room: e.target.value }))
+        }
       />
       <Divider />
       <CustomInput
         placeholder="Date du cours"
         value={formValues.date}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={(e) =>
+          setFormValues((oldForm) => ({ ...oldForm, date: e.target.value }))
+        }
         type="date"
       />
       <Divider />
       <CustomInput
         value={formValues.hourFrom}
-        onChange={(e) => setTimeFromValue(e.target.value)}
+        onChange={(e) =>
+          setFormValues((oldForm) => ({ ...oldForm, hourFrom: e.target.value }))
+        }
         placeholder="Heure de début"
         type="time"
         step="3600"
@@ -129,7 +178,9 @@ const AddCourse = () => {
       <Divider />
       <CustomInput
         value={formValues.hourTo}
-        onChange={(e) => setTimeToValue(e.target.value)}
+        onChange={(e) =>
+          setFormValues((oldForm) => ({ ...oldForm, hourTo: e.target.value }))
+        }
         placeholder="Heure de fin"
         type="time"
         step="3600"
@@ -139,7 +190,9 @@ const AddCourse = () => {
         <h2>Notes additionnelles</h2>
         <textarea
           value={formValues.notes}
-          onChange={(e) => setNotesValue(e.target.value)}
+          onChange={(e) =>
+            setFormValues((oldForm) => ({ ...oldForm, notes: e.target.value }))
+          }
           placeholder="Notes additionnelles (prof absent, changement de salle...)"
           className="rounded-lg bg-gray-600 p-4 w-full h-32"
         />
@@ -164,7 +217,7 @@ const AddCourse = () => {
             Aucun lien n'a encore été posté pour ce cours.
           </h4>
         )}
-        <label className="flex w-full justify-between items-center space-x-3">
+        <label className="flex w-full items-center space-x-3">
           <input
             value={formValues.link}
             onChange={onChangeLinkValue}
@@ -179,19 +232,32 @@ const AddCourse = () => {
       </div>
       <Divider />
       <div className="flex w-full justify-between items-center">
-        <ColorPicker color={formValues.color} setColor={setColorValue} />
+        <ColorPicker
+          color={formValues.color}
+          setColor={(newColor: string) =>
+            setFormValues((oldForm) => ({ ...oldForm, color: newColor }))
+          }
+        />
       </div>
       <Divider />
-      <button
-        disabled={formValues.title.length === 0}
-        type="submit"
-        className={clsx("rounded-lg w-1/2 px-6 py-2", {
-          "bg-gray-300 cursor-default text-gray-400": formValues.title.length === 0,
-          "bg-blue-600": formValues.title.length !== 0,
-        })}
-      >
-        Ajouter le cours
-      </button>
+      {panelStore.type === EnumPagesPanel.addCourse ? (
+        <button
+          disabled={formValues.title.length === 0}
+          type="submit"
+          className={clsx("rounded-lg w-1/2 px-6 py-2", {
+            "bg-gray-300 cursor-default text-gray-400":
+              formValues.title.length === 0,
+            "bg-blue-600": formValues.title.length !== 0,
+          })}
+        >
+          Ajouter le cours
+        </button>
+      ) : (
+        <div className="flex space-x-4">
+          <ButtonSave onClick={onClickSaveChanges} />
+          <ButtonDelete courseID={panelStore.addCourseDefault.id} />
+        </div>
+      )}
     </form>
   );
 };

@@ -20,12 +20,9 @@ const Calendar = (props: CalendarProps) => {
     const unsub = onSnapshot(q, (snap) => {
       const newDocs = snap.docs.map((doc) => ({
         id: doc.id,
-        title: doc.data().title,
-        notes: doc.data().notes,
+        ...doc.data(),
         timeFrom: JSON.parse(doc.data().timeFrom),
         timeTo: JSON.parse(doc.data().timeTo),
-        links: doc.data().links,
-        color: doc.data().color,
       }));
       const removedDuplicates: Array<any> = [];
       newDocs.forEach((doc) => {

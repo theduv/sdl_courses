@@ -15,7 +15,7 @@ const colorChoices = [
 
 interface ColorPickerProps {
   color: string;
-  setColor: Dispatch<SetStateAction<string>>;
+  setColor: (newColor: string) => void;
 }
 
 const ColorPicker = (props: ColorPickerProps) => {
