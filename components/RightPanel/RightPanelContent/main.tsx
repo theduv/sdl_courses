@@ -13,8 +13,8 @@ import Divider from "./Divider";
 import ColorPicker from "./ColorPicker";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import FormCourse from "@/interfaces/formCourse.interface";
-import ButtonSave from "../../ContentsPanel/SingleCourseDetails/ButtonSave";
-import ButtonDelete from "../../ContentsPanel/SingleCourseDetails/ButtonDelete";
+import ButtonSave from "./ButtonSave";
+import ButtonDelete from "./ButtonDelete";
 
 const AddCourse = () => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));

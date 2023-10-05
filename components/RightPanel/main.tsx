@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import AddCourse from "../ContentsPanel/AddCourse/main";
+import AddCourse from "./RightPanelContent/main";
 import useRightPanelStore from "@/store/store";
 import RightPanelHeader from "./RightPanelHeader";
 
