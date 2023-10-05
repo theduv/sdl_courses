@@ -19,8 +19,6 @@ import ButtonDelete from "../SingleCourseDetails/ButtonDelete";
 const AddCourse = () => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
 
-  console.log(panelStore);
-
   const [formValues, setFormValues] = useState<FormCourse>({
     ...panelStore.addCourseDefault,
   });
@@ -84,6 +82,8 @@ const AddCourse = () => {
         await addDoc(collection(db, "courses"), {
           title: formValues.title,
           notes: formValues.notes,
+          teacher: formValues.teacher,
+          room: formValues.room,
           timeFrom: JSON.stringify(dateStart),
           timeTo: JSON.stringify(dateEnd),
           color: formValues.color,
