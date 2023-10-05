@@ -43,7 +43,7 @@ const SingleSquare = (props: SingleSquareProps) => {
         <ButtonCourse key={`${course.id} course Link`} course={course} />
       ))}
       <ButtonAddCourse
-        hour={props.hour}
+        hour={props.hour.replaceAll("h", "").replaceAll(" ", "")}
         hovered={hovered}
         targetDate={targetDate}
       />

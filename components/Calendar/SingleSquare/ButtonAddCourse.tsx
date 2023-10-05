@@ -14,6 +14,7 @@ const ButtonAddCourse = (props: ButtonAddCourse) => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
   const formattedDate = getCustomDateFromDate(props.targetDate ?? new Date());
 
+  console.log(props.hour);
   const onClickAddCourse = () => {
     panelStore.setType(EnumPagesPanel.addCourse);
     panelStore.setAddCourseDefault({
