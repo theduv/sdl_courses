@@ -13,8 +13,8 @@ import Divider from "./Divider";
 import ColorPicker from "./ColorPicker";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import FormCourse from "@/interfaces/formCourse.interface";
-import ButtonSave from "../SingleCourseDetails/ButtonSave";
-import ButtonDelete from "../SingleCourseDetails/ButtonDelete";
+import ButtonSave from "./ButtonSave";
+import ButtonDelete from "./ButtonDelete";
 
 const AddCourse = () => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
@@ -22,11 +22,11 @@ const AddCourse = () => {
   console.log(panelStore);
 
   const [formValues, setFormValues] = useState<FormCourse>({
-    ...panelStore.addCourseDefault,
+    ...panelStore.formContent,
   });
 
   const resetForm = () => {
-    setFormValues({ ...panelStore.addCourseDefault });
+    setFormValues({ ...panelStore.formContent });
   };
 
   const onClickAddLink = () => {
@@ -38,8 +38,8 @@ const AddCourse = () => {
   };
 
   useEffect(() => {
-    setFormValues(panelStore.addCourseDefault);
-  }, [panelStore.addCourseDefault]);
+    setFormValues(panelStore.formContent);
+  }, [panelStore.formContent]);
 
   const onChangeLinkValue = (e: any) => {
     setFormValues((oldForm) => ({ ...oldForm, link: e.target.value }));
@@ -47,8 +47,8 @@ const AddCourse = () => {
 
   const onClickSaveChanges = async () => {
     try {
-      if (panelStore.addCourseDefault.id == undefined) return;
-      const ref = doc(db, "courses", panelStore.addCourseDefault.id);
+      if (panelStore.formContent.id == undefined) return;
+      const ref = doc(db, "courses", panelStore.formContent.id);
       await updateDoc(ref, {
         teacher: formValues.teacher,
         room: formValues.room,
@@ -83,6 +83,8 @@ const AddCourse = () => {
       if (panelStore.type === EnumPagesPanel.addCourse) {
         await addDoc(collection(db, "courses"), {
           title: formValues.title,
+          room: formValues.room,
+          teacher: formValues.teacher,
           notes: formValues.notes,
           timeFrom: JSON.stringify(dateStart),
           timeTo: JSON.stringify(dateEnd),
@@ -91,8 +93,8 @@ const AddCourse = () => {
         });
         toast("Cours correctement ajouté.");
       } else {
-        if (panelStore.addCourseDefault.id) {
-          const ref = doc(db, "courses", panelStore.addCourseDefault.id);
+        if (panelStore.formContent.id) {
+          const ref = doc(db, "courses", panelStore.formContent.id);
           const dateFrom = {
             year: formValues.date.split("-")[0],
             month: parseInt(formValues.date.split("-")[1]) - 1,
@@ -255,7 +257,7 @@ const AddCourse = () => {
       ) : (
         <div className="flex space-x-4">
           <ButtonSave onClick={onClickSaveChanges} />
-          <ButtonDelete courseID={panelStore.addCourseDefault.id} />
+          <ButtonDelete courseID={panelStore.formContent.id} />
         </div>
       )}
     </form>

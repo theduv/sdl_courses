@@ -8,7 +8,7 @@ const formattedToday = getCustomDateFromDate(today);
 const useRightPanelStore = create((set) => ({
   type: EnumPagesPanel.addCourse,
   isOpen: false,
-  addCourseDefault: {
+  formContent: {
     title: "",
     teacher: "",
     room: "",
@@ -23,7 +23,7 @@ const useRightPanelStore = create((set) => ({
   },
   setType: (value: EnumPagesPanel) => set({ type: value }),
   setOpen: (value: boolean) => set({ isOpen: value }),
-  setAddCourseDefault: (value: any) => set({ addCourseDefault: value }),
+  setFormContent: (value: any) => set({ addCourseDefault: value }),
 }));
 
 export default useRightPanelStore;

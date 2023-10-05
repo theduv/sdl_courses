@@ -1,7 +1,7 @@
 import Course from "@/interfaces/course.interface";
 import { getCustomDateFromDate } from "./datesLib";
 
-const GetCoursesAtTime = (
+const getCoursesAtTime = (
   coursesList: Array<Course>,
   date: Date | undefined,
   timerange: string
@@ -23,4 +23,4 @@ const GetCoursesAtTime = (
   return targetCourses;
 };
 
-export { GetCoursesAtTime };
+export { getCoursesAtTime };

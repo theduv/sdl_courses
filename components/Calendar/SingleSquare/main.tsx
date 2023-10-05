@@ -1,6 +1,6 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import { getCustomDateFromDate } from "@/functions/datesLib";
-import { GetCoursesAtTime } from "@/functions/getCoursesAtTime";
+import { getCoursesAtTime } from "@/functions/getCoursesAtTime";
 import Course from "@/interfaces/course.interface";
 import useRightPanelStore from "@/store/store";
 import clsx from "clsx";
@@ -20,7 +20,8 @@ const SingleSquare = (props: SingleSquareProps) => {
   const targetDate = props.displayedDates[props.indexSquare];
 
   const [hovered, setHovered] = useState(false);
-  const coursesAtTime = GetCoursesAtTime(
+
+  const coursesAtTime = getCoursesAtTime(
     props.coursesList,
     props.displayedDates[props.indexSquare],
     props.hour
