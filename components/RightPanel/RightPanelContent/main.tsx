@@ -3,7 +3,7 @@
 import CustomInput from "@/components/Global/CustomInput";
 import db from "@/firebase/firebaseInit";
 import CustomDate from "@/interfaces/customDate.interface";
-import Store from "@/interfaces/store.interface";
+import PanelStore from "@/interfaces/panelStore.interface";
 import { toast } from "react-toastify";
 import { useModalStore, useRightPanelStore } from "@/store/store";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
@@ -15,14 +15,21 @@ import FormCourse from "@/interfaces/formCourse.interface";
 import Button from "@/components/Global/Button";
 import EnumButtonType from "@/enums/enumButtonType";
 import ModalDeleteCourse from "@/components/Modals/ModalDeleteCourse/main";
+import ModalStore from "@/interfaces/modalStore.interface";
 
 const AddCourse = () => {
-  const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
-  const modalStore = useModalStore((state: any) => ({ ...state }));
+  const panelStore: PanelStore = useRightPanelStore((state: any) => ({
+    ...state,
+  }));
+  const modalStore: ModalStore = useModalStore((state: any) => ({ ...state }));
 
   const [formValues, setFormValues] = useState<FormCourse>({
     ...panelStore.formContent,
   });
+
+  useEffect(() => {
+    setFormValues(panelStore.formContent);
+  }, [panelStore.formContent]);
 
   const resetForm = () => {
     setFormValues({ ...panelStore.formContent });
@@ -36,16 +43,13 @@ const AddCourse = () => {
     }));
   };
 
-  useEffect(() => {
-    setFormValues(panelStore.formContent);
-  }, [panelStore.formContent]);
-
   const onChangeLinkValue = (e: any) => {
     setFormValues((oldForm) => ({ ...oldForm, link: e.target.value }));
   };
 
   const onClickDelete = async () => {
     try {
+      if (panelStore.formContent.id === undefined) return;
       modalStore.setCourseID(panelStore.formContent.id);
       modalStore.setChildren(<ModalDeleteCourse />);
       modalStore.setOpen(true);

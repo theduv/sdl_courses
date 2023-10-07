@@ -1,9 +1,7 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
-import Course from "./course.interface";
-import CustomDate from "./customDate.interface";
 import FormCourse from "./formCourse.interface";
 
-interface Store {
+interface PanelStore {
   type: EnumPagesPanel;
   isOpen: boolean;
   formContent: FormCourse;
@@ -12,4 +10,4 @@ interface Store {
   setType: (value: EnumPagesPanel) => void;
 }
 
-export default Store;
+export default PanelStore;
