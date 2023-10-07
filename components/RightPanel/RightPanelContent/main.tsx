@@ -127,7 +127,7 @@ const AddCourse = () => {
   };
 
   return (
-    <form className="flex flex-col p-8 justify-center space-y-2 scrollbar scrollbar-thumb-gray-600 scrollbar-thumb-rounded scrollbar-track-gray-100 scrollbar-track-rounded">
+    <div className="flex flex-col p-8 justify-center space-y-2 scrollbar scrollbar-thumb-gray-600 scrollbar-thumb-rounded scrollbar-track-gray-100 scrollbar-track-rounded">
       <CustomInput
         type="text"
         placeholder="Titre du cours"
@@ -259,7 +259,7 @@ const AddCourse = () => {
           />
         </div>
       )}
-    </form>
+    </div>
   );
 };
 
