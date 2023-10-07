@@ -15,7 +15,7 @@ const RightPanelHeader = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-between sticky stop-0">
+    <div className="w-full flex items-center p-4 z-10 justify-between sticky bg-gray-800 top-0">
       <div />
       <h1 className="text-2xl font-bold">{getTitle()}</h1>
       <button onClick={() => storePanel.setOpen(false)}>X</button>
