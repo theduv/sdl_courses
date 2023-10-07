@@ -19,7 +19,7 @@ const useRightPanelStore = create((set: any) => ({
     hourFrom: "08:00",
     hourTo: "09:00",
     links: [],
-    color: "",
+    color: "bg-lime-700",
   },
   setType: (value: EnumPagesPanel) => set({ type: value }),
   setOpen: (value: boolean) => set({ isOpen: value }),
