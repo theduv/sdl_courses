@@ -1,5 +1,5 @@
 import { useModalStore } from "@/store/store";
-import { deleteDoc } from "firebase/firestore/lite";
+import { deleteDoc } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
 import { toast } from "react-toastify";
 import { doc } from "firebase/firestore";

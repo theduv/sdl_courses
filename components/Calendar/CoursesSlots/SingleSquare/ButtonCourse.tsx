@@ -49,7 +49,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
     >
       <div />
       <div className="flex flex-col w-0 flex-1">
-        <p className="text-ellipsis overflow-hidden whitespace-nowrap">
+        <p className="text-ellipsis overflow-hidden whitespace-nowrap ">
           {props.course.title}
         </p>
         {((props.course.room && props.course.room.length !== 0) ||
