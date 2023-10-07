@@ -211,10 +211,10 @@ const AddCourse = () => {
           </button>
         </label>
         {formValues.links && formValues.links.length !== 0 ? (
-          <div className="flex flex-col overflow-y-auto rounded lg p-1 w-1/2 truncate ">
+          <div className="flex flex-col overflow-y-auto rounded lg p-1 truncate ">
             {formValues.links.map((link) => (
               <a
-                className="text-blue-600 underline text-sm"
+                className="text-blue-600 underline text-sm text-ellipsis overflow-hidden whitespace-nowrap"
                 href={link}
                 key={`Link to ${link}`}
               >
