@@ -8,7 +8,7 @@ interface SingleDateProps {
 const SingleDate = (props: SingleDateProps) => {
   return (
     <div
-      className="text-center w-52 font-bold mb-6 bg-amber-700 p-2 rounded-md text-white border border-gray-800 "
+      className="text-center w-52 font-bold mb-6 bg-gray-800 p-2 rounded-md text-white border border-gray-600 "
       key={props.date.getTime()}
     >
       {arrayDays[props.index]} {props.date.getDate()}{" "}

@@ -12,7 +12,10 @@ const CoursesSlot = (props: CoursesSlotProps) => {
   return arrayHours.map((hour: string, index: number) => {
     return (
       <Fragment key={hour}>
-        <div className="items-center flex justify-center">{hour}</div>
+        <div className="items-center flex justify-between px-4 rounded-lg  p-2 ">
+          <div />
+          <h1 className="italic">{hour}</h1>
+        </div>
         <SingleSquare
           index={index}
           coursesList={props.coursesList}
