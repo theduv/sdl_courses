@@ -19,8 +19,6 @@ import ButtonDelete from "./ButtonDelete";
 const AddCourse = () => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
 
-  console.log(panelStore);
-
   const [formValues, setFormValues] = useState<FormCourse>({
     ...panelStore.formContent,
   });
