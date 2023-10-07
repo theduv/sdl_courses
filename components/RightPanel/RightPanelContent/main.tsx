@@ -5,19 +5,20 @@ import db from "@/firebase/firebaseInit";
 import CustomDate from "@/interfaces/customDate.interface";
 import Store from "@/interfaces/store.interface";
 import { toast } from "react-toastify";
-import { useRightPanelStore } from "@/store/store";
-import clsx from "clsx";
+import { useModalStore, useRightPanelStore } from "@/store/store";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import Divider from "./Divider";
 import ColorPicker from "./ColorPicker";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import FormCourse from "@/interfaces/formCourse.interface";
-import ButtonSave from "./ButtonSave";
-import ButtonDelete from "./ButtonDelete";
+import Button from "@/components/Global/Button";
+import EnumButtonType from "@/enums/enumButtonType";
+import ModalDeleteCourse from "@/components/Modals/ModalDeleteCourse/main";
 
 const AddCourse = () => {
   const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
+  const modalStore = useModalStore((state: any) => ({ ...state }));
 
   const [formValues, setFormValues] = useState<FormCourse>({
     ...panelStore.formContent,
@@ -41,6 +42,17 @@ const AddCourse = () => {
 
   const onChangeLinkValue = (e: any) => {
     setFormValues((oldForm) => ({ ...oldForm, link: e.target.value }));
+  };
+
+  const onClickDelete = async () => {
+    try {
+      modalStore.setCourseID(panelStore.formContent.id);
+      modalStore.setChildren(<ModalDeleteCourse />);
+      modalStore.setOpen(true);
+      modalStore.setTitle("Supprimer un cours");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onClickSaveChanges = async () => {
@@ -76,7 +88,7 @@ const AddCourse = () => {
     }
   };
 
-  const onSubmitForm = async (e: any) => {
+  const onClickCreate = async (e: any) => {
     try {
       e.preventDefault();
       const dateStart: CustomDate = {
@@ -111,10 +123,7 @@ const AddCourse = () => {
   };
 
   return (
-    <form
-      onSubmit={onSubmitForm}
-      className="flex flex-col p-8 justify-center space-y-2 scrollbar scrollbar-thumb-gray-600 scrollbar-thumb-rounded scrollbar-track-gray-100 scrollbar-track-rounded"
-    >
+    <form className="flex flex-col p-8 justify-center space-y-2 scrollbar scrollbar-thumb-gray-600 scrollbar-thumb-rounded scrollbar-track-gray-100 scrollbar-track-rounded">
       <CustomInput
         type="text"
         placeholder="Titre du cours"
@@ -226,21 +235,24 @@ const AddCourse = () => {
       </div>
       <Divider />
       {panelStore.type === EnumPagesPanel.addCourse ? (
-        <button
+        <Button
           disabled={formValues.title.length === 0}
-          type="submit"
-          className={clsx("rounded-lg w-1/2 px-6 py-2", {
-            "bg-gray-300 cursor-default text-gray-400":
-              formValues.title.length === 0,
-            "bg-blue-600": formValues.title.length !== 0,
-          })}
-        >
-          Ajouter le cours
-        </button>
+          type={EnumButtonType.default}
+          content="Ajouter le cours"
+          onClick={onClickCreate}
+        />
       ) : (
         <div className="flex space-x-4">
-          <ButtonSave onClick={onClickSaveChanges} />
-          <ButtonDelete courseID={panelStore.formContent.id} />
+          <Button
+            onClick={onClickSaveChanges}
+            content="Enregistrer les modifications"
+            type={EnumButtonType.default}
+          />
+          <Button
+            onClick={onClickDelete}
+            content="Supprimer le cours"
+            type={EnumButtonType.delete}
+          />
         </div>
       )}
     </form>

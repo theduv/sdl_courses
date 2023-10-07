@@ -1,5 +1,5 @@
 import { Dispatch, Fragment, SetStateAction } from "react";
-import SingleSquare from "../SingleSquare/main";
+import SingleSquare from "./SingleSquare/main";
 import Course from "@/interfaces/course.interface";
 import { arrayHours } from "@/functions/datesLib";
 
@@ -8,7 +8,7 @@ interface CoursesSlotProps {
   displayedDates: Array<Date>;
 }
 
-const CoursesSlot = (props: CoursesSlotProps) => {
+const CoursesSlots = (props: CoursesSlotProps) => {
   return arrayHours.map((hour: string, index: number) => {
     return (
       <Fragment key={hour}>
@@ -56,4 +56,4 @@ const CoursesSlot = (props: CoursesSlotProps) => {
   });
 };
 
-export default CoursesSlot;
+export default CoursesSlots;

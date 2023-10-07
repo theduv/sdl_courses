@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
 import TopDates from "./TopDates/main";
-import CoursesSlot from "./CoursesSlots/main";
+import CoursesSlots from "./CoursesSlots/main";
 import GlobalModal from "../Global/GlobalModal";
 
 interface CalendarProps {
@@ -47,7 +47,7 @@ const Calendar = (props: CalendarProps) => {
     <div className="grid grid-cols-6">
       <div />
       <TopDates displayedDates={displayedDates} />
-      <CoursesSlot displayedDates={displayedDates} coursesList={coursesList} />
+      <CoursesSlots displayedDates={displayedDates} coursesList={coursesList} />
       <GlobalModal />
     </div>
   );
