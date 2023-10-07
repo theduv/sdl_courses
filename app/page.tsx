@@ -11,7 +11,10 @@ export default function Home() {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
   return (
-    <main className="flex flex-col text-gray-200 space-y-4 relative min-h-screen items-center justify-center py-4 bg-gray-700">
+    <main
+      id="mainCalendar"
+      className="flex flex-col text-gray-200 space-y-4 relative min-h-screen items-center justify-center py-4 bg-gray-700"
+    >
       <TopMenu setCurrentDate={setCurrentDate} />
       <Calendar currentDate={currentDate} />
       <RightPanel />

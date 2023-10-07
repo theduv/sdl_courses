@@ -2,7 +2,7 @@ import EnumPagesPanel from "@/enums/enumPagesPanel";
 import { colorChoices } from "@/functions/const";
 import { getCustomDateFromDate } from "@/functions/datesLib";
 import Store from "@/interfaces/store.interface";
-import useRightPanelStore from "@/store/store";
+import { useRightPanelStore } from "@/store/store";
 import clsx from "clsx";
 
 interface ButtonAddCourse {

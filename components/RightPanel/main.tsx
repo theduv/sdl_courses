@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import AddCourse from "./RightPanelContent/main";
-import useRightPanelStore from "@/store/store";
+import { useRightPanelStore } from "@/store/store";
 import RightPanelHeader from "./RightPanelHeader";
 
 const RightPanel = () => {

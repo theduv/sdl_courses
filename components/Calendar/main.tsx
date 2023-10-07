@@ -6,6 +6,7 @@ import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "@/firebase/firebaseInit";
 import TopDates from "./TopDates/main";
 import CoursesSlot from "./CoursesSlots/main";
+import GlobalModal from "../Global/GlobalModal";
 
 interface CalendarProps {
   currentDate: Date;
@@ -14,6 +15,7 @@ interface CalendarProps {
 const Calendar = (props: CalendarProps) => {
   const [displayedDates, setDisplayedDates] = useState<Array<Date>>([]);
   const [coursesList, setCoursesList] = useState<Array<Course>>([]);
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     const q = query(collection(db, "courses"));
@@ -46,6 +48,7 @@ const Calendar = (props: CalendarProps) => {
       <div />
       <TopDates displayedDates={displayedDates} />
       <CoursesSlot displayedDates={displayedDates} coursesList={coursesList} />
+      <GlobalModal />
     </div>
   );
 };

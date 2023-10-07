@@ -27,4 +27,15 @@ const useRightPanelStore = create((set: any) => ({
   setFormContent: (value: any) => set({ formContent: value }),
 }));
 
-export default useRightPanelStore;
+const useModalStore = create((set: any) => ({
+  isOpen: false,
+  courseID: "",
+  title: "",
+  children: <div></div>,
+  setOpen: (value: boolean) => set({ isOpen: value }),
+  setCourseID: (value: string) => set({ courseID: value }),
+  setChildren: (value: JSX.Element) => set({ children: value }),
+  setTitle: (value: string) => set({ title: value }),
+}));
+
+export { useRightPanelStore, useModalStore };

@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Dispatch, Fragment, SetStateAction } from "react";
 import SingleSquare from "../SingleSquare/main";
 import Course from "@/interfaces/course.interface";
 import { arrayHours } from "@/functions/datesLib";

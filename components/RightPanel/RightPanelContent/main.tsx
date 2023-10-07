@@ -5,7 +5,7 @@ import db from "@/firebase/firebaseInit";
 import CustomDate from "@/interfaces/customDate.interface";
 import Store from "@/interfaces/store.interface";
 import { toast } from "react-toastify";
-import useRightPanelStore from "@/store/store";
+import { useRightPanelStore } from "@/store/store";
 import clsx from "clsx";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";

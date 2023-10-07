@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from "react";
 import ButtonCalendar from "./ButtonCalendar";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import { VscTriangleLeft, VscTriangleRight } from "react-icons/vsc";
-import useRightPanelStore from "@/store/store";
+import { useRightPanelStore } from "@/store/store";
 import { getCustomDateFromDate } from "@/functions/datesLib";
 
 interface TopMenuProps {

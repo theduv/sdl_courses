@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.1.13",
     "clsx": "^2.0.0",
     "firebase": "^10.4.0",
+    "framer-motion": "^10.16.4",
     "next": "latest",
     "planby": "^1.1.4",
     "react": "latest",

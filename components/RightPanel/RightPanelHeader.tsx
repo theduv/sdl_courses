@@ -1,6 +1,6 @@
 "use client";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
-import useRightPanelStore from "@/store/store";
+import { useRightPanelStore } from "@/store/store";
 
 const RightPanelHeader = () => {
   const storePanel = useRightPanelStore((state: any) => ({
@@ -15,7 +15,7 @@ const RightPanelHeader = () => {
   };
 
   return (
-    <div className="w-full flex items-center justify-between sticky top-0">
+    <div className="w-full flex items-center justify-between sticky stop-0">
       <div />
       <h1 className="text-2xl font-bold">{getTitle()}</h1>
       <button onClick={() => storePanel.setOpen(false)}>X</button>
