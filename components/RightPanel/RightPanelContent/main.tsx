@@ -61,14 +61,14 @@ const AddCourse = () => {
         hour: parseInt(formValues.hourTo.split(":")[0]),
       };
       await updateDoc(ref, {
-        teacher: formValues.teacher,
-        room: formValues.room,
-        notes: formValues.notes,
-        title: formValues.title,
+        teacher: formValues.teacher.trim(),
+        room: formValues.room.trim(),
+        notes: formValues.notes.trim(),
+        title: formValues.title.trim(),
         // timeFrom: JSON.stringify(dateStart),
         // timeTo: JSON.stringify(dateEnd),
-        links: formValues.links.join(";"),
-        color: formValues.color,
+        links: formValues.links.join(";").trim(),
+        color: formValues.color.trim(),
       });
       toast("Cours correctement modifié.");
     } catch (e) {
@@ -95,14 +95,14 @@ const AddCourse = () => {
 
       if (panelStore.type === EnumPagesPanel.addCourse) {
         await addDoc(collection(db, "courses"), {
-          teacher: formValues.teacher,
-          room: formValues.room,
-          title: formValues.title,
-          notes: formValues.notes,
+          teacher: formValues.teacher.trim(),
+          room: formValues.room.trim(),
+          title: formValues.title.trim(),
+          notes: formValues.notes.trim(),
           timeFrom: JSON.stringify(dateStart),
           timeTo: JSON.stringify(dateEnd),
-          color: formValues.color,
-          links: formValues.links.join(";"),
+          color: formValues.color.trim(),
+          links: formValues.links.join(";").trim(),
         });
         toast("Cours correctement ajouté.");
       } else {
@@ -122,14 +122,14 @@ const AddCourse = () => {
           };
 
           await updateDoc(ref, {
-            room: formValues.room,
-            teacher: formValues.teacher,
-            notes: formValues.notes,
+            room: formValues.room.trim(),
+            teacher: formValues.teacher.trim(),
+            notes: formValues.notes.trim(),
             timeFrom: JSON.stringify(dateFrom),
             timeTo: JSON.stringify(dateTo),
-            title: formValues.title,
+            title: formValues.title.trim(),
             links: formValues.links.join(";"),
-            color: formValues.color,
+            color: formValues.color.trim(),
           });
           toast("Cours correctement modifié.");
         }
