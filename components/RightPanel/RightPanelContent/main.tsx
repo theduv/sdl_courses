@@ -215,7 +215,7 @@ const AddCourse = () => {
             {formValues.links.map((link) => (
               <a
                 className="text-blue-600 underline text-sm"
-                href="link"
+                href={link}
                 key={`Link to ${link}`}
               >
                 {link}
