@@ -65,8 +65,8 @@ const AddCourse = () => {
         room: formValues.room,
         notes: formValues.notes,
         title: formValues.title,
-        timeFrom: JSON.stringify(dateStart),
-        timeTo: JSON.stringify(dateEnd),
+        // timeFrom: JSON.stringify(dateStart),
+        // timeTo: JSON.stringify(dateEnd),
         links: formValues.links.join(";"),
         color: formValues.color,
       });
