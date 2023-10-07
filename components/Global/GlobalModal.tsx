@@ -32,7 +32,6 @@ const GlobalModal = () => {
 
   return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
       <Modal
         isOpen={modalStore.isOpen}
         onRequestClose={closeModal}
