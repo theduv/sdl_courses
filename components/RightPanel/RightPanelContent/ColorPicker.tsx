@@ -26,6 +26,7 @@ const ColorPicker = (props: ColorPickerProps) => {
     <div className="flex space-x-4">
       {colorChoices.map((colorChoice) => (
         <button
+          key={colorChoice + "_choice"}
           onClick={() => onClickColor(colorChoice)}
           type="button"
           className={clsx(`rounded-full h-6 w-6 ${colorChoice}`, {

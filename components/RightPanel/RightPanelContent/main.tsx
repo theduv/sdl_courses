@@ -49,11 +49,26 @@ const AddCourse = () => {
     try {
       if (panelStore.formContent.id == undefined) return;
       const ref = doc(db, "courses", panelStore.formContent.id);
+      const dateStart: CustomDate = {
+        date: parseInt(formValues.date.split("-")[2]),
+        month: parseInt(formValues.date.split("-")[1]) - 1,
+        year: parseInt(formValues.date.split("-")[0]),
+        hour: parseInt(formValues.hourFrom.split(":")[0]),
+      };
+
+      const dateEnd: CustomDate = {
+        date: parseInt(formValues.date.split("-")[2]),
+        month: parseInt(formValues.date.split("-")[1]) - 1,
+        year: parseInt(formValues.date.split("-")[0]),
+        hour: parseInt(formValues.hourTo.split(":")[0]),
+      };
       await updateDoc(ref, {
         teacher: formValues.teacher,
         room: formValues.room,
         notes: formValues.notes,
         title: formValues.title,
+        timeFrom: JSON.stringify(dateStart),
+        timeTo: JSON.stringify(dateEnd),
         links: formValues.links.join(";"),
         color: formValues.color,
       });
