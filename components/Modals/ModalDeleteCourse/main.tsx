@@ -11,7 +11,6 @@ const ModalDeleteCourse = () => {
 
   const onClickDelete = async () => {
     try {
-      console.log(modalStore.courseID);
       await deleteDoc(doc(db, "courses", modalStore.courseID));
       modalStore.setOpen(false);
       toast("Cours correctement supprimé.");
