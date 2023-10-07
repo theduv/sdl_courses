@@ -24,6 +24,8 @@ const Button = (props: ButtonProps) => {
         "bg-red-700": props.type === EnumButtonType.delete && hovered,
         "bg-blue-600": props.type === EnumButtonType.default && !hovered,
         "bg-blue-700": props.type === EnumButtonType.default && hovered,
+        "bg-gray-600": props.type === EnumButtonType.cancel && !hovered,
+        "bg-gray-700": props.type === EnumButtonType.cancel && hovered,
       })}
     >
       {props.content}
