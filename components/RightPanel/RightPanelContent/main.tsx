@@ -185,8 +185,20 @@ const AddCourse = () => {
       <Divider />
       <div className="flex flex-col space-y-4">
         <h2>Lien(s) vers les prises de notes</h2>
+        <label className="flex w-full items-center space-x-3">
+          <input
+            value={formValues.link}
+            onChange={onChangeLinkValue}
+            type="url"
+            className="rounded-lg bg-gray-600 px-4 py-2 w-4/5"
+            placeholder="Lien google drive, dropbox..."
+          />
+          <button className="text-2xl" onClick={onClickAddLink} type="button">
+            +
+          </button>
+        </label>
         {formValues.links && formValues.links.length !== 0 ? (
-          <div className="flex flex-col h-8 overflow-y-auto border rounded lg p-1 border-opacity-40 border-white w-1/2 truncate ">
+          <div className="flex flex-col overflow-y-auto rounded lg p-1 w-1/2 truncate ">
             {formValues.links.map((link) => (
               <a
                 className="text-blue-600 underline text-sm"
@@ -202,18 +214,6 @@ const AddCourse = () => {
             Aucun lien n'a encore été posté pour ce cours.
           </h4>
         )}
-        <label className="flex w-full items-center space-x-3">
-          <input
-            value={formValues.link}
-            onChange={onChangeLinkValue}
-            type="url"
-            className="rounded-lg bg-gray-600 px-4 py-2 w-4/5"
-            placeholder="Lien google drive, dropbox..."
-          />
-          <button className="text-2xl" onClick={onClickAddLink} type="button">
-            +
-          </button>
-        </label>
       </div>
       <Divider />
       <div className="flex w-full justify-between items-center">

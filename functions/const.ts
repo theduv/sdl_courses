@@ -7,7 +7,7 @@ const colorChoices = [
   "bg-red-700",
   "bg-orange-700",
   "bg-yellow-700",
-  "bg-gray-700",
+  "bg-gray-500",
 ];
 
 const arrayMonths = [
