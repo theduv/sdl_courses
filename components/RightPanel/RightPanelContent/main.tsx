@@ -82,6 +82,8 @@ const AddCourse = () => {
 
       if (panelStore.type === EnumPagesPanel.addCourse) {
         await addDoc(collection(db, "courses"), {
+          teacher: formValues.teacher,
+          room: formValues.room,
           title: formValues.title,
           notes: formValues.notes,
           timeFrom: JSON.stringify(dateStart),

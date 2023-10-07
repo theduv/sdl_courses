@@ -37,7 +37,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
   return (
     <button
       className={
-        "h-full w-0 rounded-md flex-1 items-center justify-between flex p-1 space-x-2 text-white " +
+        "h-full w-0 rounded-md flex-1 items-center justify-between flex p-1 space-x-2 text-white  " +
         props.course.color
       }
       key={props.course.id}
