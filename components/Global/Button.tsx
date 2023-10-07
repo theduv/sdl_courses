@@ -1,5 +1,6 @@
 import EnumButtonType from "@/enums/enumButtonType";
 import clsx from "clsx";
+import { useState } from "react";
 
 interface ButtonProps {
   type: EnumButtonType;
@@ -9,14 +10,20 @@ interface ButtonProps {
 }
 
 const Button = (props: ButtonProps) => {
+  const [hovered, setHovered] = useState<boolean>(false);
+
   return (
     <button
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       type="button"
       onClick={props.onClick}
       className={clsx("px-4 py-2 rounded-lg font-bold", {
         "bg-gray-400": props.disabled,
-        "bg-red-600": props.type === EnumButtonType.delete,
-        "bg-blue-600": props.type === EnumButtonType.default,
+        "bg-red-600": props.type === EnumButtonType.delete && !hovered,
+        "bg-red-700": props.type === EnumButtonType.delete && hovered,
+        "bg-blue-600": props.type === EnumButtonType.default && !hovered,
+        "bg-blue-700": props.type === EnumButtonType.default && hovered,
       })}
     >
       {props.content}
