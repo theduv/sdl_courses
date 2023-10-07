@@ -1,5 +1,5 @@
 import { useModalStore } from "@/store/store";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React from "react";
 import Modal from "react-modal";
 
 const customStyles = {
