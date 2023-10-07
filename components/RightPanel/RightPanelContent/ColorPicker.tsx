@@ -1,16 +1,5 @@
+import { colorChoices } from "@/functions/const";
 import clsx from "clsx";
-
-const colorChoices = [
-  "bg-lime-700",
-  "bg-green-700",
-  "bg-blue-700",
-  "bg-purple-700",
-  "bg-pink-700",
-  "bg-red-700",
-  "bg-orange-700",
-  "bg-yellow-700",
-  "bg-gray-700",
-];
 
 interface ColorPickerProps {
   color: string;

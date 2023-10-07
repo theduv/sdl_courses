@@ -1,4 +1,5 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
+import { colorChoices } from "@/functions/const";
 import Course from "@/interfaces/course.interface";
 import Store from "@/interfaces/store.interface";
 import useRightPanelStore from "@/store/store";
@@ -30,7 +31,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
       hourTo: `${props.course.timeTo.hour.toString().padStart(2, "0")}:00`,
       links: props.course.links ? props.course.links.split(";") : [],
       link: "",
-      color: props.course.color ?? "bg-lime-600",
+      color: props.course.color ?? colorChoices[0],
     });
   };
 

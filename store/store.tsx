@@ -1,4 +1,5 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
+import { colorChoices } from "@/functions/const";
 import { getCustomDateFromDate } from "@/functions/datesLib";
 import { create } from "zustand";
 
@@ -19,7 +20,7 @@ const useRightPanelStore = create((set: any) => ({
     hourFrom: "08:00",
     hourTo: "09:00",
     links: [],
-    color: "bg-lime-700",
+    color: colorChoices[0],
   },
   setType: (value: EnumPagesPanel) => set({ type: value }),
   setOpen: (value: boolean) => set({ isOpen: value }),

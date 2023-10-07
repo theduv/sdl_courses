@@ -1,4 +1,5 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
+import { colorChoices } from "@/functions/const";
 import { getCustomDateFromDate } from "@/functions/datesLib";
 import Store from "@/interfaces/store.interface";
 import useRightPanelStore from "@/store/store";
@@ -28,7 +29,7 @@ const ButtonAddCourse = (props: ButtonAddCourse) => {
       links: [],
       link: "",
       notes: "",
-      color: "bg-lime-600",
+      color: colorChoices[0],
     });
     panelStore.setOpen(true);
   };
