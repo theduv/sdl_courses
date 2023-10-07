@@ -1,6 +1,4 @@
 import { useModalStore } from "@/store/store";
-import ButtonCancelDelete from "./ButtonCancelDelete";
-import ButtonDeleteCourse from "./ButtonDeleteCourse";
 import { deleteDoc } from "firebase/firestore/lite";
 import db from "@/firebase/firebaseInit";
 import { toast } from "react-toastify";
