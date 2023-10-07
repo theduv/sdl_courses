@@ -22,7 +22,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
       teacher: props.course.teacher ? props.course.teacher : "",
       notes: props.course.notes,
       room: props.course.room ?? "",
-      date: `${props.course.timeFrom.year}-${props.course.timeFrom.month
+      date: `${props.course.timeFrom.year}-${(props.course.timeFrom.month + 1)
         .toString()
         .padStart(2, "0")}-${props.course.timeFrom.date
         .toString()

@@ -65,8 +65,8 @@ const AddCourse = () => {
         room: formValues.room.trim(),
         notes: formValues.notes.trim(),
         title: formValues.title.trim(),
-        // timeFrom: JSON.stringify(dateStart),
-        // timeTo: JSON.stringify(dateEnd),
+        timeFrom: JSON.stringify(dateStart),
+        timeTo: JSON.stringify(dateEnd),
         links: formValues.links.join(";").trim(),
         color: formValues.color.trim(),
       });
@@ -93,47 +93,17 @@ const AddCourse = () => {
         hour: parseInt(formValues.hourTo.split(":")[0]),
       };
 
-      if (panelStore.type === EnumPagesPanel.addCourse) {
-        await addDoc(collection(db, "courses"), {
-          teacher: formValues.teacher.trim(),
-          room: formValues.room.trim(),
-          title: formValues.title.trim(),
-          notes: formValues.notes.trim(),
-          timeFrom: JSON.stringify(dateStart),
-          timeTo: JSON.stringify(dateEnd),
-          color: formValues.color.trim(),
-          links: formValues.links.join(";").trim(),
-        });
-        toast("Cours correctement ajouté.");
-      } else {
-        if (panelStore.formContent.id) {
-          const ref = doc(db, "courses", panelStore.formContent.id);
-          const dateFrom = {
-            year: formValues.date.split("-")[0],
-            month: parseInt(formValues.date.split("-")[1]) - 1,
-            date: parseInt(formValues.date.split("-")[2]),
-            hour: formValues.hourFrom,
-          };
-          const dateTo = {
-            year: formValues.date.split("-")[0],
-            month: parseInt(formValues.date.split("-")[1]) - 1,
-            date: parseInt(formValues.date.split("-")[2]),
-            hour: formValues.hourTo,
-          };
-
-          await updateDoc(ref, {
-            room: formValues.room.trim(),
-            teacher: formValues.teacher.trim(),
-            notes: formValues.notes.trim(),
-            timeFrom: JSON.stringify(dateFrom),
-            timeTo: JSON.stringify(dateTo),
-            title: formValues.title.trim(),
-            links: formValues.links.join(";"),
-            color: formValues.color.trim(),
-          });
-          toast("Cours correctement modifié.");
-        }
-      }
+      await addDoc(collection(db, "courses"), {
+        teacher: formValues.teacher.trim(),
+        room: formValues.room.trim(),
+        title: formValues.title.trim(),
+        notes: formValues.notes.trim(),
+        timeFrom: JSON.stringify(dateStart),
+        timeTo: JSON.stringify(dateEnd),
+        color: formValues.color.trim(),
+        links: formValues.links.join(";").trim(),
+      });
+      toast("Cours correctement ajouté.");
       resetForm();
     } catch (e) {
       console.log(e);
