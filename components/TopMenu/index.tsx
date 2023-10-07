@@ -4,6 +4,7 @@ import EnumPagesPanel from "@/enums/enumPagesPanel";
 import { VscTriangleLeft, VscTriangleRight } from "react-icons/vsc";
 import { useRightPanelStore } from "@/store/store";
 import { getCustomDateFromDate } from "@/functions/datesLib";
+import { AiFillGithub } from "react-icons/ai";
 
 interface TopMenuProps {
   setCurrentDate: Dispatch<SetStateAction<Date>>;
@@ -27,30 +28,37 @@ const TopMenu = (props: TopMenuProps) => {
   };
 
   return (
-    <div className="flex items-center space-x-6">
-      <button
-        onClick={() =>
-          props.setCurrentDate((oldDate) => {
-            const oneLessWeek = new Date(oldDate);
-            oneLessWeek.setDate(oldDate.getDate() - 7);
-            return oneLessWeek;
-          })
-        }
-      >
-        <VscTriangleLeft size={33} color={"rgb(229,231,235)"} />
-      </button>
-      <ButtonCalendar text="Ajouter un cours" onClick={onClickAddCourse} />
-      <button
-        onClick={() =>
-          props.setCurrentDate((oldDate) => {
-            const oneMoreWeek = new Date(oldDate);
-            oneMoreWeek.setDate(oldDate.getDate() + 7);
-            return oneMoreWeek;
-          })
-        }
-      >
-        <VscTriangleRight size={33} color={"rgb(229,231,235)"} />
-      </button>
+    <div className="flex items-center justify-between w-full px-8">
+      <a href="https://www.github.com/theduv/sdl_courses" target="_blank">
+        <AiFillGithub size={40} />
+      </a>
+      <div className="flex items-center space-x-6">
+        <button
+          onClick={() =>
+            props.setCurrentDate((oldDate) => {
+              const oneLessWeek = new Date(oldDate);
+              oneLessWeek.setDate(oldDate.getDate() - 7);
+              return oneLessWeek;
+            })
+          }
+        >
+          <VscTriangleLeft size={33} color={"rgb(229,231,235)"} />
+        </button>
+        <ButtonCalendar text="Ajouter un cours" onClick={onClickAddCourse} />
+        <button
+          onClick={() =>
+            props.setCurrentDate((oldDate) => {
+              const oneMoreWeek = new Date(oldDate);
+              oneMoreWeek.setDate(oldDate.getDate() + 7);
+              return oneMoreWeek;
+            })
+          }
+        >
+          <VscTriangleRight size={33} color={"rgb(229,231,235)"} />
+        </button>
+      </div>
+
+      <div />
     </div>
   );
 };

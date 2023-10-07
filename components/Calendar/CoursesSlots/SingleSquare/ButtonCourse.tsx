@@ -1,7 +1,7 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import { colorChoices } from "@/functions/const";
 import Course from "@/interfaces/course.interface";
-import Store from "@/interfaces/store.interface";
+import PanelStore from "@/interfaces/panelStore.interface";
 import { useRightPanelStore } from "@/store/store";
 import { AiOutlineLink } from "react-icons/ai";
 import { FaRegNoteSticky } from "react-icons/fa6";
@@ -11,7 +11,9 @@ interface ButtonCourseProps {
 }
 
 const ButtonCourse = (props: ButtonCourseProps) => {
-  const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
+  const panelStore: PanelStore = useRightPanelStore((state: any) => ({
+    ...state,
+  }));
 
   const onClickDetailsCourse = () => {
     panelStore.setOpen(true);

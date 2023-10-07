@@ -1,7 +1,7 @@
 import EnumPagesPanel from "@/enums/enumPagesPanel";
 import { colorChoices } from "@/functions/const";
 import { getCustomDateFromDate } from "@/functions/datesLib";
-import Store from "@/interfaces/store.interface";
+import PanelStore from "@/interfaces/panelStore.interface";
 import { useRightPanelStore } from "@/store/store";
 import clsx from "clsx";
 
@@ -12,7 +12,9 @@ interface ButtonAddCourse {
 }
 
 const ButtonAddCourse = (props: ButtonAddCourse) => {
-  const panelStore: Store = useRightPanelStore((state: any) => ({ ...state }));
+  const panelStore: PanelStore = useRightPanelStore((state: any) => ({
+    ...state,
+  }));
   const formattedDate = getCustomDateFromDate(props.targetDate ?? new Date());
 
   const onClickAddCourse = () => {
