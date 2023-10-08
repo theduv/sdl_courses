@@ -9,7 +9,7 @@ const RightPanel = () => {
   const refTop = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
-    refTop.current?.scrollTo(0, 0);
+    refTop.current?.scrollTo(0, 0); // reset scrolling to top when changing panel content
   }, [panelStore.formContent]);
 
   return (

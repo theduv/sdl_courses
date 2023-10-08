@@ -5,9 +5,6 @@ import db from "@/firebase/firebaseInit";
 import CustomDate from "@/interfaces/customDate.interface";
 import PanelStore from "@/interfaces/panelStore.interface";
 import { toast } from "react-toastify";
-import { useModalStore, useRightPanelStore } from "@/store/store";
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import Divider from "./Divider";
 import ColorPicker from "./ColorPicker";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
@@ -16,6 +13,9 @@ import Button from "@/components/Global/Button";
 import EnumButtonType from "@/enums/enumButtonType";
 import ModalDeleteCourse from "@/components/Modals/ModalDeleteCourse/main";
 import ModalStore from "@/interfaces/modalStore.interface";
+import { useModalStore, useRightPanelStore } from "@/store/store";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
 
 const AddCourse = () => {
