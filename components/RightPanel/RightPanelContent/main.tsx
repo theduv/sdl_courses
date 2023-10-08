@@ -16,6 +16,7 @@ import Button from "@/components/Global/Button";
 import EnumButtonType from "@/enums/enumButtonType";
 import ModalDeleteCourse from "@/components/Modals/ModalDeleteCourse/main";
 import ModalStore from "@/interfaces/modalStore.interface";
+import { ImCross } from "react-icons/im";
 
 const AddCourse = () => {
   const panelStore: PanelStore = useRightPanelStore((state: any) => ({
@@ -41,6 +42,17 @@ const AddCourse = () => {
       link: "",
       links: [...oldForm.links, formValues.link],
     }));
+  };
+
+  const onClickDeleteLink = (index: number) => {
+    setFormValues((oldForm) => {
+      const newArray = [...oldForm.links];
+      newArray.splice(index, 1);
+      return {
+        ...oldForm,
+        links: newArray,
+      };
+    });
   };
 
   const onChangeLinkValue = (e: any) => {
@@ -212,14 +224,25 @@ const AddCourse = () => {
         </label>
         {formValues.links && formValues.links.length !== 0 ? (
           <div className="flex flex-col overflow-y-auto rounded lg p-1 truncate ">
-            {formValues.links.map((link) => (
-              <a
-                className="text-blue-600 underline text-sm text-ellipsis overflow-hidden whitespace-nowrap"
-                href={link}
+            {formValues.links.map((link, index) => (
+              <div
+                className="flex items-center space-x-2"
                 key={`Link to ${link}`}
               >
-                {link}
-              </a>
+                <button
+                  className="text-red-600"
+                  type="button"
+                  onClick={() => onClickDeleteLink(index)}
+                >
+                  <ImCross size={12} />
+                </button>
+                <a
+                  className="text-blue-600 underline text-sm text-ellipsis overflow-hidden whitespace-nowrap"
+                  href={link}
+                >
+                  {link}
+                </a>
+              </div>
             ))}
           </div>
         ) : (
