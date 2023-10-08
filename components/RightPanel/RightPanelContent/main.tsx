@@ -147,7 +147,7 @@ const AddCourse = () => {
         onChange={(e) =>
           setFormValues((oldForm) => ({ ...oldForm, title: e.target.value }))
         }
-      ></CustomInput>
+      />
       <Divider />
       <CustomInput
         type="text"
