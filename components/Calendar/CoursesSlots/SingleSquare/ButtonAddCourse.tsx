@@ -15,6 +15,7 @@ const ButtonAddCourse = (props: ButtonAddCourse) => {
   const panelStore: PanelStore = useRightPanelStore((state: any) => ({
     ...state,
   }));
+
   const formattedDate = getCustomDateFromDate(props.targetDate ?? new Date());
 
   const onClickAddCourse = () => {

@@ -1,4 +1,4 @@
-import { Dispatch, Fragment, SetStateAction } from "react";
+import { Fragment } from "react";
 import SingleSquare from "./SingleSquare/main";
 import Course from "@/interfaces/course.interface";
 import { arrayHours } from "@/functions/datesLib";
@@ -10,6 +10,7 @@ interface CoursesSlotProps {
 
 const CoursesSlots = (props: CoursesSlotProps) => {
   return arrayHours.map((hour: string, index: number) => {
+    // each hour = the hour itself + the 5 empty squares for the 5 days
     return (
       <Fragment key={hour}>
         <div className="items-center flex justify-between px-4 rounded-lg  p-2 ">

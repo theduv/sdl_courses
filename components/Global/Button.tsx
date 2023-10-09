@@ -18,6 +18,7 @@ const Button = (props: ButtonProps) => {
       onMouseLeave={() => setHovered(false)}
       type="button"
       onClick={props.onClick}
+      disabled={props.disabled}
       className={clsx("px-4 py-2 rounded-lg font-bold", {
         "bg-gray-400": props.disabled,
         "bg-red-600": props.type === EnumButtonType.delete && !hovered,

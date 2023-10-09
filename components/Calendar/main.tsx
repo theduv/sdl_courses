@@ -15,7 +15,6 @@ interface CalendarProps {
 const Calendar = (props: CalendarProps) => {
   const [displayedDates, setDisplayedDates] = useState<Array<Date>>([]);
   const [coursesList, setCoursesList] = useState<Array<Course>>([]);
-  const [openModal, setOpenModal] = useState<boolean>(false);
 
   useEffect(() => {
     const q = query(collection(db, "courses"));
