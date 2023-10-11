@@ -12,6 +12,7 @@ interface Course {
   backgroundColor?: string;
   textColor?: string;
   color?: string;
+  isCanceled?: boolean;
 }
 
 export default Course;

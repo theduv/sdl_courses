@@ -3,6 +3,7 @@ import { colorChoices } from "@/functions/const";
 import Course from "@/interfaces/course.interface";
 import PanelStore from "@/interfaces/panelStore.interface";
 import { useRightPanelStore } from "@/store/store";
+import { clsx } from "clsx";
 import { AiOutlineLink } from "react-icons/ai";
 import { FaRegNoteSticky } from "react-icons/fa6";
 
@@ -21,6 +22,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
     panelStore.setFormContent({
       id: props.course.id,
       title: props.course.title,
+      isCanceled: props.course.isCanceled ?? false,
       teacher: props.course.teacher ? props.course.teacher : "",
       notes: props.course.notes,
       room: props.course.room ?? "",
@@ -39,10 +41,12 @@ const ButtonCourse = (props: ButtonCourseProps) => {
 
   return (
     <button
-      className={
-        "h-full w-0 rounded-md flex-1 items-center justify-between flex p-1 space-x-2 text-white " +
-        props.course.color
-      }
+      className={clsx(
+        `h-full w-0 rounded-md flex-1 items-center justify-between flex p-1 space-x-2 text-white ${props.course.color}`,
+        {
+          "bg-opacity-30 text-opacity-30": props.course.isCanceled,
+        }
+      )}
       key={props.course.id}
       title={props.course.title}
       onClick={onClickDetailsCourse}

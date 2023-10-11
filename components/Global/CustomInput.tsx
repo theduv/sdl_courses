@@ -4,6 +4,7 @@ interface CustomInputProps {
   required?: boolean;
   value: string;
   step?: string;
+  checked?: boolean;
   onChange: (e: any) => void;
 }
 
@@ -12,6 +13,7 @@ const CustomInput = (props: CustomInputProps) => {
     <label className="flex space-x-4 items-center w-full justify-between">
       <h3>{props.placeholder}</h3>
       <input
+        checked={props.checked}
         required={!!props.required}
         value={props.value}
         placeholder={props.placeholder}

@@ -97,6 +97,7 @@ const AddCourse = () => {
         timeTo: JSON.stringify(dateEnd),
         links: formValues.links.join(";").trim(),
         color: formValues.color.trim(),
+        isCanceled: formValues.isCanceled,
       });
       toast("Cours correctement modifié.");
     } catch (e) {
@@ -130,6 +131,7 @@ const AddCourse = () => {
         timeTo: JSON.stringify(dateEnd),
         color: formValues.color.trim(),
         links: formValues.links.join(";").trim(),
+        isCanceled: formValues.isCanceled,
       });
       toast("Cours correctement ajouté.");
       resetForm();
@@ -174,6 +176,18 @@ const AddCourse = () => {
           setFormValues((oldForm) => ({ ...oldForm, date: e.target.value }))
         }
         type="date"
+      />
+      <Divider />
+      <CustomInput
+        type="checkbox"
+        placeholder="Cours annulé"
+        checked={formValues.isCanceled}
+        onChange={(e) => {
+          setFormValues((oldForm) => ({
+            ...oldForm,
+            isCanceled: e.target.checked,
+          }));
+        }}
       />
       <Divider />
       <CustomInput

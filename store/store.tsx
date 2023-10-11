@@ -10,6 +10,7 @@ const useRightPanelStore = create((set: any) => ({
   type: EnumPagesPanel.addCourse,
   isOpen: false,
   formContent: {
+    isCaneled: false,
     title: "",
     teacher: "",
     room: "",

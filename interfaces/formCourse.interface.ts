@@ -10,6 +10,7 @@ interface FormCourse {
   links: Array<string>;
   link: string;
   color: string;
+  isCanceled: boolean;
 }
 
 export default FormCourse;
