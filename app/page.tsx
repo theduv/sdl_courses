@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main
       id="mainCalendar"
-      className="flex flex-col text-gray-200 space-y-4 relative min-h-screen items-center justify-center py-4 bg-gray-700"
+      className="flex max-[1260px]:text-xs flex-col text-gray-200 space-y-4 relative min-h-screen items-center justify-center py-4 bg-gray-700"
     >
       <TopMenu setCurrentDate={setCurrentDate} />
       <Calendar currentDate={currentDate} />

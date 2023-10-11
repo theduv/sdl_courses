@@ -11,7 +11,7 @@ interface CustomInputProps {
 const CustomInput = (props: CustomInputProps) => {
   return (
     <label className="flex space-x-4 items-center w-full justify-between">
-      <h3>{props.placeholder}</h3>
+      <h3 className="text-ellipsis truncate">{props.placeholder}</h3>
       <input
         checked={props.checked}
         required={!!props.required}
