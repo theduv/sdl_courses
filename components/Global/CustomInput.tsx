@@ -2,7 +2,7 @@ interface CustomInputProps {
   type: string;
   placeholder: string;
   required?: boolean;
-  value: string;
+  value?: string;
   step?: string;
   checked?: boolean;
   onChange: (e: any) => void;
