@@ -1,10 +1,8 @@
 "use client";
 
 import CustomInput from "@/components/Global/CustomInput";
-import db from "@/firebase/firebaseInit";
 import CustomDate from "@/interfaces/customDate.interface";
 import PanelStore from "@/interfaces/panelStore.interface";
-import { toast } from "react-toastify";
 import Divider from "./Divider";
 import ColorPicker from "./ColorPicker";
 import EnumPagesPanel from "@/enums/enumPagesPanel";
@@ -13,6 +11,8 @@ import Button from "@/components/Global/Button";
 import EnumButtonType from "@/enums/enumButtonType";
 import ModalDeleteCourse from "@/components/Modals/ModalDeleteCourse/main";
 import ModalStore from "@/interfaces/modalStore.interface";
+import db from "@/firebase/firebaseInit";
+import { toast } from "react-toastify";
 import { useModalStore, useRightPanelStore } from "@/store/store";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -75,17 +75,17 @@ const AddCourse = () => {
     try {
       if (panelStore.formContent.id == undefined) return;
       const ref = doc(db, "courses", panelStore.formContent.id);
+      const splittedDate = formValues.date.split("-");
+
       const dateStart: CustomDate = {
-        date: parseInt(formValues.date.split("-")[2]),
-        month: parseInt(formValues.date.split("-")[1]) - 1,
-        year: parseInt(formValues.date.split("-")[0]),
+        date: parseInt(splittedDate[2]),
+        month: parseInt(splittedDate[1]) - 1,
+        year: parseInt(splittedDate[0]),
         hour: parseInt(formValues.hourFrom.split(":")[0]),
       };
 
       const dateEnd: CustomDate = {
-        date: parseInt(formValues.date.split("-")[2]),
-        month: parseInt(formValues.date.split("-")[1]) - 1,
-        year: parseInt(formValues.date.split("-")[0]),
+        ...dateStart,
         hour: parseInt(formValues.hourTo.split(":")[0]),
       };
       await updateDoc(ref, {
@@ -108,17 +108,17 @@ const AddCourse = () => {
   const onClickCreate = async (e: any) => {
     try {
       e.preventDefault();
+      const splittedDate = formValues.date.split("-");
+
       const dateStart: CustomDate = {
-        date: parseInt(formValues.date.split("-")[2]),
-        month: parseInt(formValues.date.split("-")[1]) - 1,
-        year: parseInt(formValues.date.split("-")[0]),
+        date: parseInt(splittedDate[2]),
+        month: parseInt(splittedDate[1]) - 1,
+        year: parseInt(splittedDate[0]),
         hour: parseInt(formValues.hourFrom.split(":")[0]),
       };
 
       const dateEnd: CustomDate = {
-        date: parseInt(formValues.date.split("-")[2]),
-        month: parseInt(formValues.date.split("-")[1]) - 1,
-        year: parseInt(formValues.date.split("-")[0]),
+        ...dateStart,
         hour: parseInt(formValues.hourTo.split(":")[0]),
       };
 

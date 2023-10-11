@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import AddCourse from "./RightPanelContent/main";
-import { useRightPanelStore } from "@/store/store";
 import RightPanelHeader from "./RightPanelHeader";
+import { useRightPanelStore } from "@/store/store";
 import { useEffect, useRef } from "react";
 
 const RightPanel = () => {
