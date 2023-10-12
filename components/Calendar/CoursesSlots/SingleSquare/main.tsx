@@ -1,7 +1,7 @@
 import { GetCoursesAtTime } from "@/functions/getCoursesAtTime";
-import Course from "@/interfaces/course.interface";
-import clsx from "clsx";
 import { useState } from "react";
+import clsx from "clsx";
+import Course from "@/interfaces/course.interface";
 import ButtonCourse from "./ButtonCourse";
 import ButtonAddCourse from "./ButtonAddCourse";
 

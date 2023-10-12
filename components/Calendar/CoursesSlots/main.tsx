@@ -13,7 +13,7 @@ const CoursesSlots = (props: CoursesSlotProps) => {
     // each hour = the hour itself + the 5 empty squares for the 5 days
     return (
       <Fragment key={hour}>
-        <div className="items-center flex justify-between px-4 rounded-lg  p-2 ">
+        <div className="items-center flex justify-between px-4 rounded-lg p-2">
           <div />
           <h1 className="italic">{hour}</h1>
         </div>

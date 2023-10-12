@@ -42,7 +42,7 @@ const ButtonCourse = (props: ButtonCourseProps) => {
   return (
     <button
       className={clsx(
-        `h-full w-0 rounded-md flex-1 items-center justify-between flex p-1 space-x-2 text-white ${props.course.color}`,
+        `h-full max-[700px]:p-0 w-0 rounded-md flex-1 items-center justify-between flex p-1 space-x-2 text-white ${props.course.color}`,
         {
           "bg-opacity-30 text-opacity-30": props.course.isCanceled,
         }
