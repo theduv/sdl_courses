@@ -1,11 +1,11 @@
 "use client";
 
+import "react-toastify/dist/ReactToastify.css";
 import Calendar from "@/components/Calendar/main";
 import TopMenu from "@/components/TopMenu";
 import RightPanel from "@/components/RightPanel/main";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import GlobalModal from "@/components/Global/GlobalModal";
 
 export default function Home() {

@@ -14,19 +14,27 @@ interface SingleSquareProps {
 }
 
 const SingleSquare = (props: SingleSquareProps) => {
-  const targetDate = props.displayedDates[props.indexSquare];
-
   const [hovered, setHovered] = useState(false);
+
+  const targetDate = props.displayedDates[props.indexSquare];
   const coursesAtTime = GetCoursesAtTime(
     props.coursesList,
     props.displayedDates[props.indexSquare],
     props.hour
   );
 
+  const mouseEnterHandler = () => {
+    setHovered(true);
+  };
+
+  const mouseLeaveHandler = () => {
+    setHovered(false);
+  };
+
   return (
     <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={mouseEnterHandler}
+      onMouseLeave={mouseLeaveHandler}
       className={clsx(
         "h-14 border border-b border-t-0 border-l-0 p-1 text-gray-500 flex items-center justify-center space-x-1 border-opacity-20 border-gray-200",
         {
