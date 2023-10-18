@@ -1,4 +1,6 @@
+import { smallDateFormatWidth } from "@/functions/const";
 import { arrayDays, arrayMonths } from "@/functions/datesLib";
+import { useConfigStore } from "@/store/store";
 
 interface SingleDateProps {
   date: Date;
@@ -6,13 +8,21 @@ interface SingleDateProps {
 }
 
 const SingleDate = (props: SingleDateProps) => {
+  const configStore = useConfigStore((state: any) => ({ ...state }));
+
   return (
     <div
-      className="text-center truncate max-[1260px]:w-full w-52 text-gray-200 w-52 font-bold mb-6 bg-gray-800 p-2 rounded-md text-white border border-gray-600 "
+      className="text-center truncate max-[900px]:w-full text-gray-200 w-52 font-bold mb-6 bg-gray-800 p-2 rounded-md text-white border border-gray-600 "
       key={props.date.getTime()}
     >
-      {arrayDays[props.index]} {props.date.getDate()}{" "}
-      {arrayMonths[props.date.getMonth()].substring(0, 3)}.
+      <p>
+        {configStore.windowWidth >= smallDateFormatWidth &&
+          `${arrayDays[props.index]} `}
+        {props.date.getDate()}
+        {configStore.windowWidth < smallDateFormatWidth
+          ? `/${props.date.getMonth() + 1}`
+          : ` ${arrayMonths[props.date.getMonth()].substring(0, 3)}.`}
+      </p>
     </div>
   );
 };

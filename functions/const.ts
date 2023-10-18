@@ -49,4 +49,14 @@ const arrayDays = [
   "Dimanche",
 ];
 
-export { colorChoices, arrayDays, arrayHours, arrayMonths };
+const smallScreenWidth = 400;
+const smallDateFormatWidth = 700;
+
+export {
+  colorChoices,
+  arrayDays,
+  arrayHours,
+  arrayMonths,
+  smallScreenWidth,
+  smallDateFormatWidth,
+};

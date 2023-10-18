@@ -39,4 +39,9 @@ const useModalStore = create((set: any) => ({
   setTitle: (value: string) => set({ title: value }),
 }));
 
-export { useRightPanelStore, useModalStore };
+const useConfigStore = create((set: any) => ({
+  windowWidth: 0,
+  setWindowWidth: (value: number) => set({ windowWidth: value }),
+}));
+
+export { useRightPanelStore, useModalStore, useConfigStore };
